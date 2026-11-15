@@ -4,27 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>小魔女DoReMi冒险 ～「秘密的魔法」～ | おジャ魔女あどべんちゃ～「ないしょのまほう」</title>
-  <meta name="description" content="《小魔女DoReMi冒险 ～「秘密的魔法」～》（おジャ魔女あどべんちゃ～「ないしょのまほう」）Ren'Py 8 跨平台移植版，支持 Windows / Linux 免环境点击即玩与日语/简体中文双语实时切换。">
+  <meta name="description" content="おジャ魔女あどべんちゃ～「ないしょのまほう」/ 小魔女DoReMi冒险 ～「秘密的魔法」～ Ren'Py 8 跨平台移植版">
   <link rel="icon" type="image/png" href="favicon.png">
   <style>
+    /* Colors synced to https://www.toei-anim.co.jp/tv/doremi/ */
     :root {
-      --bg: #fff9f6;
-      --bg-soft: #fff2f6;
-      --surface: #ffffff;
-      --surface-tint: #fff7fa;
-      --text: #2c1e26;
-      --muted: #6c5661;
-      --pink: #e84588;
-      --pink-deep: #c72c6d;
-      --pink-soft: #ffe3ef;
-      --orange: #f49342;
-      --blue: #3a9ef5;
-      --purple: #9867e8;
-      --yellow: #eab528;
-      --border: #f3dce6;
-      --shadow: 0 14px 38px rgba(176, 62, 109, 0.10);
-      --shadow-sm: 0 6px 18px rgba(176, 62, 109, 0.08);
-      --radius: 20px;
+      --colF: #FF81A8;
+      --colL: #FFE2E2;
+      --colB: #B70472;
+      --colA: #FFB2CA;
+      --pink-bar-top: #FF78AE;
+      --pink-bar-mid: #FF3E8C;
+      --pink-bar-bot: #E92574;
+      --text: #242424;
+      --muted: #66525B;
+      --star-yellow: #FFF176;
+      --star-blue: #19C2FF;
     }
 
     * {
@@ -38,15 +33,19 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Noto Sans SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(900px 420px at 8% -4%, rgba(255, 198, 224, 0.45), transparent 60%),
-        radial-gradient(760px 380px at 94% 8%, rgba(169, 219, 255, 0.35), transparent 60%),
-        radial-gradient(640px 360px at 50% 62%, rgba(255, 228, 179, 0.28), transparent 65%),
-        var(--bg);
-      line-height: 1.65;
+      font-size: 13px;
+      line-height: 1.6;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      /* Recreates classic 20x20 warm peach gingham background tile (back.jpg) */
+      background-color: #FCF0E9;
+      background-image:
+        linear-gradient(90deg, rgba(244, 212, 198, 0.36) 50%, transparent 50%),
+        linear-gradient(rgba(244, 212, 198, 0.36) 50%, transparent 50%);
+      background-size: 12px 12px;
     }
 
     a {
@@ -54,537 +53,367 @@
       text-decoration: none;
     }
 
-    .container {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    /* Top Bar */
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      background: rgba(255, 249, 246, 0.85);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .topbar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
+    /* Classic centered 820px Toei Portal Frame */
+    .portal-wrap {
+      width: min(840px, calc(100% - 20px));
+      margin: 14px auto 24px;
+      flex: 1;
+      display: grid;
+      grid-template-columns: 168px minmax(0, 1fr);
       gap: 16px;
+      align-items: start;
     }
 
-    .brand {
+    /* Left Sidebar Navigation (inspired by menu01..05.gif capsules) */
+    .sidebar {
       display: flex;
-      align-items: center;
-      gap: 10px;
+      flex-direction: column;
+      gap: 9px;
+      position: sticky;
+      top: 14px;
+    }
+
+    .logo-tile {
+      background: #FFFFFF;
+      border: 3px solid var(--colF);
+      border-radius: 14px;
+      padding: 10px 8px;
+      text-align: center;
+      box-shadow: 0 3px 0 rgba(183, 4, 114, 0.16);
+    }
+
+    .logo-tile img {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: block;
+      margin: 0 auto 6px;
+    }
+
+    .logo-tile .s-jp {
+      display: block;
+      font-size: 11px;
       font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: 0.01em;
+      color: var(--colB);
+      line-height: 1.3;
     }
 
-    .brand img {
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(232, 69, 136, 0.22);
+    .logo-tile .s-cn {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text);
+      margin-top: 2px;
     }
 
-    .nav-links {
+    .menu-btn {
+      position: relative;
       display: flex;
       align-items: center;
-      gap: 22px;
-      font-size: 0.92rem;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .nav-links a:hover {
-      color: var(--pink);
-    }
-
-    .nav-cta {
-      padding: 7px 14px;
+      justify-content: center;
+      gap: 6px;
+      height: 52px;
+      padding: 0 12px;
       border-radius: 999px;
-      background: var(--pink-soft);
-      color: var(--pink-deep) !important;
-      font-weight: 600;
-      transition: transform 0.15s ease, background 0.15s ease;
+      border: 3px solid var(--colF);
+      background: linear-gradient(180deg, #FFFFFF 0%, #FFEAF2 55%, #FFD1E4 100%);
+      color: var(--colB);
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      box-shadow: 0 3px 0 #F5A3C1;
+      transition: transform 0.12s ease, background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
     }
 
-    .nav-cta:hover {
-      background: #ffd1e5;
+    .menu-btn::before,
+    .menu-btn::after {
+      content: "★";
+      font-size: 11px;
+      color: #FFD43B;
+      text-shadow: 0 0 1px var(--colB), 1px 1px 0 var(--colF);
+    }
+
+    .menu-btn:hover,
+    .menu-btn.active {
+      background: linear-gradient(180deg, #FF99BE 0%, #FF5C9D 55%, #E62C79 100%);
+      border-color: #FFFFFF;
+      color: #FFFFFF;
+      box-shadow: 0 3px 0 var(--colB), 0 0 0 2px var(--colF);
       transform: translateY(-1px);
     }
 
-    /* Hero */
-    .hero {
-      padding: 46px 0 36px;
+    .menu-btn:hover::before,
+    .menu-btn:hover::after,
+    .menu-btn.active::before,
+    .menu-btn.active::after {
+      color: var(--star-yellow);
+      text-shadow: none;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.04fr 0.96fr;
-      gap: 38px;
-      align-items: center;
-    }
-
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 5px 13px;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--pink-deep);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .note-dots {
-      display: inline-flex;
-      gap: 6px;
-      align-items: center;
-    }
-
-    .note-dots span {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      display: inline-block;
-    }
-
-    h1.title-cn {
-      font-size: clamp(1.9rem, 3.2vw, 2.65rem);
-      line-height: 1.2;
-      font-weight: 800;
-      color: var(--text);
-      letter-spacing: -0.01em;
-    }
-
-    .title-jp {
-      margin-top: 8px;
-      font-size: clamp(1rem, 1.5vw, 1.18rem);
-      font-weight: 600;
-      color: var(--pink-deep);
-      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Noto Sans JP", sans-serif;
-    }
-
-    .hero-desc {
-      margin-top: 16px;
+    .side-meta {
+      background: #FFFFFF;
+      border: 2px solid var(--colA);
+      border-radius: 12px;
+      padding: 10px;
+      font-size: 11px;
       color: var(--muted);
-      font-size: 1rem;
-      max-width: 540px;
+      line-height: 1.55;
     }
 
-    .hero-actions {
-      margin-top: 24px;
+    .side-meta div {
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+      justify-content: space-between;
+      border-bottom: 1px dashed var(--colL);
+      padding: 3px 0;
     }
 
-    .btn {
-      display: inline-flex;
+    .side-meta div:last-child {
+      border-bottom: none;
+    }
+
+    .side-meta strong {
+      color: var(--colB);
+    }
+
+    /* Right White Content Area */
+    .main-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .panel {
+      background: #FFFFFF;
+      border: 2px solid var(--colA);
+      border-radius: 16px;
+      padding: 14px 16px 16px;
+      box-shadow: 0 4px 12px rgba(183, 4, 114, 0.06);
+    }
+
+    /* Glossy Star Capsule Header (inspired by arasuji_title.gif) */
+    .star-bar {
+      position: relative;
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 9px;
-      padding: 12px 20px;
-      border-radius: 14px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #f05295, #df3678);
-      color: #fff;
-      box-shadow: 0 10px 24px rgba(223, 54, 120, 0.28);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 28px rgba(223, 54, 120, 0.34);
-    }
-
-    .btn-secondary {
-      background: var(--surface);
-      color: var(--text);
-      border-color: var(--border);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .btn-secondary:hover {
-      transform: translateY(-2px);
-      border-color: #ebb7cd;
-      background: var(--surface-tint);
-    }
-
-    .hero-meta {
-      margin-top: 16px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      font-size: 0.86rem;
-      color: var(--muted);
-    }
-
-    .hero-meta a {
-      color: var(--pink-deep);
-      font-weight: 600;
-    }
-
-    .hero-meta a:hover {
-      text-decoration: underline;
-    }
-
-    /* Interactive Hero Stage */
-    .stage-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 12px;
-      box-shadow: var(--shadow);
-    }
-
-    .stage-viewport {
-      position: relative;
-      aspect-ratio: 4 / 3;
-      border-radius: 14px;
-      overflow: hidden;
-      background: #f8eaf0;
-      cursor: zoom-in;
-    }
-
-    .stage-viewport img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.28s ease;
-    }
-
-    .stage-viewport:hover img {
-      transform: scale(1.015);
-    }
-
-    .stage-caption {
-      position: absolute;
-      left: 10px;
-      right: 10px;
-      bottom: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 7px 12px;
-      border-radius: 10px;
-      background: rgba(36, 22, 30, 0.72);
-      backdrop-filter: blur(6px);
-      color: #fff;
-      font-size: 0.84rem;
-      font-weight: 500;
-    }
-
-    .stage-tabs {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .stage-tab {
-      border: 1px solid var(--border);
-      background: var(--surface-tint);
-      color: var(--muted);
-      border-radius: 10px;
-      padding: 7px 6px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      text-align: center;
-    }
-
-    .stage-tab:hover {
-      border-color: #f1a9c7;
-      color: var(--pink-deep);
-    }
-
-    .stage-tab.active {
-      background: var(--pink);
-      border-color: var(--pink);
-      color: #fff;
-    }
-
-    /* Section Headings */
-    section {
-      padding: 36px 0;
-    }
-
-    .sec-head {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 22px;
-      flex-wrap: wrap;
-    }
-
-    .sec-head h2 {
-      font-size: 1.5rem;
+      min-height: 44px;
+      padding: 6px 46px;
+      margin-bottom: 14px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #FF93BF 0%, #FF4794 46%, #EE2678 100%);
+      border: 2px solid #FF2E85;
+      box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.55), 0 3px 0 rgba(255, 129, 168, 0.35);
+      color: #FFFFFF;
+      font-size: 16px;
       font-weight: 800;
+      letter-spacing: 0.04em;
+      text-shadow: 0 1px 2px rgba(145, 0, 74, 0.45);
+    }
+
+    .star-bar .stars-left,
+    .star-bar .stars-right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
       display: flex;
       align-items: center;
-      gap: 10px;
+      pointer-events: none;
     }
 
-    .sec-sub {
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
+    .star-bar .stars-left { left: 8px; }
+    .star-bar .stars-right { right: 8px; }
 
-    /* Features */
-    .feat-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-
-    .feat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.18s ease;
-    }
-
-    .feat-card:hover {
-      transform: translateY(-3px);
-    }
-
-    .feat-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      font-size: 1.2rem;
-      font-weight: 700;
+    /* Hero Main Visual */
+    .hero-head {
+      text-align: center;
       margin-bottom: 12px;
     }
 
-    .feat-card h3 {
-      font-size: 1.02rem;
-      margin-bottom: 6px;
+    .hero-head h1 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--colB);
+      line-height: 1.3;
+    }
+
+    .hero-head .jp-name {
+      font-size: 13px;
       font-weight: 700;
+      color: #E0387E;
+      margin-top: 2px;
     }
 
-    .feat-card p {
-      font-size: 0.89rem;
-      color: var(--muted);
-    }
-
-    /* Gallery */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
-    .shot-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
+    .hero-stage {
+      border: 3px solid var(--colF);
+      border-radius: 10px;
       overflow: hidden;
-      box-shadow: var(--shadow-sm);
+      background: var(--colL);
       cursor: zoom-in;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
 
-    .shot-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow);
-    }
-
-    .shot-img-wrap {
-      aspect-ratio: 4 / 3;
-      overflow: hidden;
-      background: #f8eaf0;
-    }
-
-    .shot-img-wrap img {
+    .hero-stage img {
+      display: block;
       width: 100%;
-      height: 100%;
+      aspect-ratio: 4 / 3;
       object-fit: cover;
-      display: block;
-      transition: transform 0.25s ease;
     }
 
-    .shot-card:hover .shot-img-wrap img {
-      transform: scale(1.02);
-    }
-
-    .shot-info {
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .shot-info strong {
-      font-size: 0.96rem;
-      display: block;
-    }
-
-    .shot-info span {
-      font-size: 0.84rem;
-      color: var(--muted);
-    }
-
-    /* Download Section */
-    .dl-grid {
+    .quick-dl {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 10px;
+      margin-top: 12px;
     }
 
-    .dl-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .dl-head {
+    .dl-pill {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 13px;
+      border: 2px solid var(--colF);
+      transition: transform 0.12s ease, filter 0.12s ease;
+    }
+
+    .dl-pill:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+    }
+
+    .dl-win {
+      background: linear-gradient(180deg, #FF7CB2 0%, #EE2E7F 100%);
+      color: #FFFFFF;
+      border-color: var(--colB);
+    }
+
+    .dl-lin {
+      background: var(--colL);
+      color: var(--colB);
+    }
+
+    /* Info Table (authentic .colL / .colA Toei table feel) */
+    table.spec {
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 12px;
+    }
+
+    table.spec th,
+    table.spec td {
+      border: 1px solid var(--colA);
+      padding: 6px 10px;
+      text-align: left;
+      overflow-wrap: anywhere;
+    }
+
+    table.spec th {
+      width: 84px;
+      background: var(--colL);
+      color: var(--colB);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    table.spec td {
+      background: #FFFFFF;
+    }
+
+    /* Screenshots 2x2 */
+    .shot-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 12px;
     }
 
-    .dl-title {
-      font-size: 1.15rem;
-      font-weight: 800;
+    .shot-item {
+      border: 2px solid var(--colA);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #FFF8FB;
+      cursor: zoom-in;
+      transition: border-color 0.14s ease, transform 0.14s ease;
     }
 
-    .dl-size {
-      font-size: 0.82rem;
+    .shot-item:hover {
+      border-color: var(--colF);
+      transform: translateY(-2px);
+    }
+
+    .shot-item img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .shot-cap {
+      padding: 5px 8px;
+      background: var(--colL);
+      color: var(--colB);
+      font-size: 12px;
       font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: var(--bg-soft);
-      color: var(--pink-deep);
+      text-align: center;
+      border-top: 1px solid var(--colA);
     }
 
-    .dl-card p {
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .cmd-box {
-      background: #241920;
-      color: #ffe9f3;
-      border-radius: 12px;
-      padding: 11px 14px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.81rem;
+    /* Download & Run Box */
+    .run-cmd {
+      margin-top: 8px;
+      background: #FFF6FA;
+      border: 1px solid var(--colA);
+      border-radius: 8px;
+      padding: 7px 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 11.5px;
+      color: var(--text);
+      max-width: 100%;
       overflow-x: auto;
     }
 
-    .cmd-box code {
-      white-space: nowrap;
+    .run-cmd code {
+      min-width: 0;
+      word-break: break-all;
     }
 
     .copy-btn {
       flex-shrink: 0;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
-      border-radius: 8px;
-      padding: 4px 10px;
-      font-size: 0.78rem;
+      border: 1px solid var(--colF);
+      background: var(--colL);
+      color: var(--colB);
+      border-radius: 6px;
+      padding: 3px 9px;
+      font-size: 11px;
+      font-weight: 700;
       cursor: pointer;
     }
 
     .copy-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: var(--colF);
+      color: #FFFFFF;
     }
 
-    .save-banner {
-      margin-top: 18px;
-      background: var(--surface-tint);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
-      font-size: 0.92rem;
+    /* Classic Full-Width #FF81A8 Footer Bar */
+    .toei-footer {
+      background-color: var(--colF);
+      color: #FFFFFF;
+      text-align: center;
+      padding: 7px 12px;
+      font-size: 11px;
+      line-height: 1.5;
     }
 
-    .save-banner code {
-      background: var(--pink-soft);
-      color: var(--pink-deep);
-      padding: 2px 8px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 0.88em;
-    }
-
-    /* Footer */
-    footer {
-      margin-top: 24px;
-      padding: 28px 0 42px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.86rem;
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-    }
-
-    .footer-links a:hover {
-      color: var(--pink);
+    .toei-footer a {
+      color: #FFFFFF;
       text-decoration: underline;
     }
 
@@ -593,12 +422,11 @@
       position: fixed;
       inset: 0;
       z-index: 200;
-      background: rgba(20, 12, 17, 0.88);
-      backdrop-filter: blur(6px);
+      background: rgba(34, 8, 22, 0.84);
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 20px;
     }
 
     .lightbox.open {
@@ -607,315 +435,244 @@
 
     .lb-box {
       position: relative;
-      max-width: min(920px, 100%);
+      max-width: min(860px, 100%);
+      background: #FFFFFF;
+      border: 4px solid var(--colF);
+      border-radius: 14px;
+      padding: 10px;
       text-align: center;
     }
 
     .lb-box img {
       max-width: 100%;
-      max-height: 80vh;
-      border-radius: 14px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+      max-height: 78vh;
       display: block;
-      margin: 0 auto;
+      border-radius: 8px;
     }
 
     .lb-caption {
-      margin-top: 12px;
-      color: #fff;
-      font-size: 0.95rem;
-      font-weight: 600;
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--colB);
     }
 
-    .lb-btn {
+    .lb-nav {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 42px;
-      height: 42px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      border: none;
-      background: rgba(255, 255, 255, 0.16);
-      color: #fff;
-      font-size: 1.25rem;
+      border: 2px solid #FFFFFF;
+      background: var(--colF);
+      color: #FFFFFF;
+      font-size: 18px;
+      font-weight: 800;
       cursor: pointer;
     }
 
-    .lb-btn:hover {
-      background: rgba(255, 255, 255, 0.3);
-    }
-
-    .lb-prev { left: -56px; }
-    .lb-next { right: -56px; }
+    .lb-prev { left: -18px; }
+    .lb-next { right: -18px; }
 
     .lb-close {
-      position: fixed;
-      top: 18px;
-      right: 22px;
-      width: 40px;
-      height: 40px;
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
-      border: none;
-      background: rgba(255, 255, 255, 0.18);
-      color: #fff;
-      font-size: 1.4rem;
+      border: 2px solid #FFFFFF;
+      background: var(--colB);
+      color: #FFFFFF;
+      font-size: 16px;
+      font-weight: 800;
       cursor: pointer;
     }
 
-    @media (max-width: 960px) {
-      .hero-grid {
+    @media (max-width: 720px) {
+      .portal-wrap {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+      }
+      .sidebar {
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+      .logo-tile,
+      .side-meta {
+        grid-column: 1 / -1;
+      }
+      .menu-btn {
+        height: 42px;
+        font-size: 13px;
+      }
+      .star-bar {
+        font-size: 14px;
+        padding: 6px 40px;
+      }
+      .hero-head h1 {
+        font-size: 16px;
+      }
+      table.spec th {
+        width: 68px;
+        padding: 6px 8px;
+      }
+      .quick-dl,
+      .shot-grid {
         grid-template-columns: 1fr;
       }
-      .feat-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .lb-prev { left: 10px; }
-      .lb-next { right: 10px; }
-    }
-
-    @media (max-width: 680px) {
-      .nav-links a:not(.nav-cta) {
-        display: none;
-      }
-      .feat-grid,
-      .gallery-grid,
-      .dl-grid {
-        grid-template-columns: 1fr;
-      }
-      .stage-tabs {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .lb-prev { left: 8px; }
+      .lb-next { right: 8px; }
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container topbar-inner">
-      <a class="brand" href="#">
-        <img src="favicon.png" alt="小魔女DoReMi冒险图标">
-        <span>小魔女DoReMi冒险</span>
-      </a>
-      <nav class="nav-links">
-        <a href="#features">特性</a>
-        <a href="#gallery">游戏截图</a>
-        <a href="#download">下载游玩</a>
-        <a class="nav-cta" href="https://github.com/dibin666/NaishoNoMahou-renpy" target="_blank" rel="noopener">GitHub</a>
-      </nav>
-    </div>
-  </header>
+  <div class="portal-wrap">
+    <aside class="sidebar">
+      <div class="logo-tile">
+        <img src="favicon.png" alt="NaishoNoMahou">
+        <span class="s-jp">おジャ魔女あどべんちゃ～<br>「ないしょのまほう」</span>
+        <span class="s-cn">小魔女DoReMi冒险</span>
+      </div>
 
-  <main class="container">
-    <section class="hero">
-      <div class="hero-grid">
-        <div>
-          <div class="badge-row">
-            <span class="pill">Ren'Py 8 跨平台移植版 · v1.0.0</span>
-            <span class="note-dots" aria-hidden="true" title="DoReMi · 羽月 · 爱子 · 音符 · 桃子 · 小花">
-              <span style="background:#ff5d9e"></span>
-              <span style="background:#ff9933"></span>
-              <span style="background:#3a9ef5"></span>
-              <span style="background:#9867e8"></span>
-              <span style="background:#f4c531"></span>
-              <span style="background:#fff0b3;border:1px solid #e6c656"></span>
-            </span>
-          </div>
+      <a class="menu-btn active" href="#top">作品首页</a>
+      <a class="menu-btn" href="#shots">游戏截图</a>
+      <a class="menu-btn" href="#download">下载游玩</a>
+      <a class="menu-btn" href="https://github.com/dibin666/NaishoNoMahou-renpy" target="_blank" rel="noopener">GitHub</a>
 
-          <h1 class="title-cn">小魔女DoReMi冒险<br>～「秘密的魔法」～</h1>
-          <p class="title-jp">おジャ魔女あどべんちゃ～「ないしょのまほう」</p>
+      <div class="side-meta">
+        <div><span>版本</span><strong>v1.0.0</strong></div>
+        <div><span>引擎</span><strong>Ren'Py 8</strong></div>
+        <div><span>平台</span><strong>Win / Linux</strong></div>
+        <div><span>语言</span><strong>日文 / 简中</strong></div>
+      </div>
+    </aside>
 
-          <p class="hero-desc">
-            将原版 KiriKiri2 视觉小说完整移植至 Ren'Py 8 引擎。内置完整语音、BGM、立绘与 CG 资源，无需 Python 或额外运行库，打开即玩，并支持<strong>日语原版 / 简体中文</strong>实时切换。
-          </p>
-
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-win.zip">
-              Windows 版下载 (.zip)
-            </a>
-            <a class="btn btn-secondary" href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-linux.tar.bz2">
-              Linux 版下载 (.tar.bz2)
-            </a>
-          </div>
-
-          <div class="hero-meta">
-            <span>平台：Windows / Linux x86_64</span>
-            <span>·</span>
-            <a href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/tag/v1.0.0" target="_blank" rel="noopener">查看 Release 详情</a>
-            <span>·</span>
-            <a href="https://github.com/dibin666/NaishoNoMahou-renpy/blob/main/docs/RESEARCH_AND_ARCHITECTURE.md" target="_blank" rel="noopener">移植技术文档</a>
-          </div>
+    <main class="main-col">
+      <section class="panel" id="top">
+        <div class="star-bar">
+          <span class="stars-left" aria-hidden="true">
+            <svg width="34" height="28" viewBox="0 0 34 28"><polygon points="15,2 18,10 27,10 20,15 23,23 15,18 7,23 10,15 3,10 12,10" fill="#FFF176" stroke="#FF2E85" stroke-width="1.3"/><polygon points="27,13 28.5,17 33,17 29.5,19.5 31,24 27,21 23,24 24.5,19.5 21,17 25.5,17" fill="#19C2FF"/></svg>
+          </span>
+          小魔女DoReMi冒险 ～「秘密的魔法」～
+          <span class="stars-right" aria-hidden="true">
+            <svg width="34" height="28" viewBox="0 0 34 28"><polygon points="19,2 22,10 31,10 24,15 27,23 19,18 11,23 14,15 7,10 16,10" fill="#FFF176" stroke="#FF2E85" stroke-width="1.3"/><polygon points="7,13 8.5,17 13,17 9.5,19.5 11,24 7,21 3,24 4.5,19.5 1,17 5.5,17" fill="#19C2FF"/></svg>
+          </span>
         </div>
 
-        <div class="stage-card">
-          <div class="stage-viewport" id="stageViewport" title="点击放大预览">
-            <img id="stageImg" src="screenshots/01_title_zh.png" alt="简体中文标题界面">
-            <div class="stage-caption">
-              <span id="stageCaptionText">简体中文标题界面</span>
-              <span>点击放大 ↗</span>
-            </div>
-          </div>
-          <div class="stage-tabs" role="tablist" aria-label="切换预览截图">
-            <button class="stage-tab active" data-index="0" type="button">标题界面</button>
-            <button class="stage-tab" data-index="1" type="button">序章 Logo</button>
-            <button class="stage-tab" data-index="2" type="button">实机对话</button>
-            <button class="stage-tab" data-index="3" type="button">CG 相册</button>
-          </div>
+        <div class="hero-head">
+          <h1>おジャ魔女あどべんちゃ～「ないしょのまほう」</h1>
+          <div class="jp-name">Ren'Py 8 跨平台移植版 · 免安装点击即玩</div>
         </div>
-      </div>
-    </section>
 
-    <section id="features">
-      <div class="sec-head">
-        <h2>移植特性</h2>
-        <span class="sec-sub">保留原版演出节奏与操作手感，适配现代桌面环境</span>
-      </div>
-      <div class="feat-grid">
-        <article class="feat-card">
-          <div class="feat-icon" style="background:#ffe5f0;color:#d83479;">▶</div>
-          <h3>双平台免安装直启</h3>
-          <p>Windows 与 Linux x86_64 独立整合包，无需预先安装 Python 或 Ren'Py 环境，解压即玩。</p>
-        </article>
-        <article class="feat-card">
-          <div class="feat-icon" style="background:#fff1de;color:#d67218;">译</div>
-          <h3>日语 / 简中实时切换</h3>
-          <p>涵盖全部剧情剧本、UI 菜单、本地化按钮与简体中文游戏 Logo，游玩途中可在顶栏随时切换。</p>
-        </article>
-        <article class="feat-card">
-          <div class="feat-icon" style="background:#e5f3ff;color:#1d7fd8;">字</div>
-          <h3>双字体排版模式</h3>
-          <p>支持「等幅ゴシック」原作排版比例与「プロポーショナル」比例字体切换，清晰适配高分屏。</p>
-        </article>
-        <article class="feat-card">
-          <div class="feat-icon" style="background:#f1e8ff;color:#7342cc;">★</div>
-          <h3>完整系统与特典</h3>
-          <p>完整还原 30 格存档/锁定、右键菜单、序章点击推进，以及 CG 相册、剧情回忆与隐藏特典。</p>
-        </article>
-      </div>
-    </section>
+        <div class="hero-stage" id="heroStage" title="点击放大">
+          <img src="screenshots/01_title_zh.png" alt="小魔女DoReMi冒险 标题画面">
+        </div>
 
-    <section id="gallery">
-      <div class="sec-head">
-        <h2>游戏截图</h2>
-        <span class="sec-sub">点击任意图片可放大并左右切换浏览</span>
-      </div>
-      <div class="gallery-grid">
-        <figure class="shot-card" data-index="0">
-          <div class="shot-img-wrap">
-            <img src="screenshots/01_title_zh.png" alt="简体中文标题界面" loading="lazy">
-          </div>
-          <figcaption class="shot-info">
-            <div>
-              <strong>标题界面</strong>
-              <span>简体中文化标题 Logo 与主菜单按钮</span>
-            </div>
-            <span>01</span>
-          </figcaption>
-        </figure>
-
-        <figure class="shot-card" data-index="1">
-          <div class="shot-img-wrap">
-            <img src="screenshots/02_prologue_logo_zh.png" alt="序章简体中文 Logo" loading="lazy">
-          </div>
-          <figcaption class="shot-info">
-            <div>
-              <strong>序章中文 Logo</strong>
-              <span>支持自动播放或鼠标点击推进</span>
-            </div>
-            <span>02</span>
-          </figcaption>
-        </figure>
-
-        <figure class="shot-card" data-index="2">
-          <div class="shot-img-wrap">
-            <img src="screenshots/03_dialogue_zh.png" alt="MAHO堂实机对话画面" loading="lazy">
-          </div>
-          <figcaption class="shot-info">
-            <div>
-              <strong>实机对话演出</strong>
-              <span>MAHO 堂场景、角色立绘与双语对白框</span>
-            </div>
-            <span>03</span>
-          </figcaption>
-        </figure>
-
-        <figure class="shot-card" data-index="3">
-          <div class="shot-img-wrap">
-            <img src="screenshots/04_cg_gallery_zh.png" alt="特典 CG 相册界面" loading="lazy">
-          </div>
-          <figcaption class="shot-info">
-            <div>
-              <strong>特典 CG 相册</strong>
-              <span>全 7 页 44 组 CG 鉴赏，支持差分全图浏览</span>
-            </div>
-            <span>04</span>
-          </figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section id="download">
-      <div class="sec-head">
-        <h2>下载即玩</h2>
-        <span class="sec-sub">整合包已包含完整游戏音频、视频、图像与字体资源</span>
-      </div>
-
-      <div class="dl-grid">
-        <div class="dl-card">
-          <div>
-            <div class="dl-head">
-              <span class="dl-title">Windows (x86_64)</span>
-              <span class="dl-size">约 692 MiB</span>
-            </div>
-            <p style="margin-top:10px;">下载 ZIP 压缩包后解压至任意目录，双击其中的 <code>NaishoNoMahou.exe</code> 即可开始游戏。</p>
-          </div>
-          <a class="btn btn-primary" href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-win.zip">
-            下载 NaishoNoMahou-1.0.0-win.zip
+        <div class="quick-dl">
+          <a class="dl-pill dl-win" href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-win.zip">
+            Windows 下载 (.zip)
+          </a>
+          <a class="dl-pill dl-lin" href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-linux.tar.bz2">
+            Linux 下载 (.tar.bz2)
           </a>
         </div>
 
-        <div class="dl-card">
-          <div>
-            <div class="dl-head">
-              <span class="dl-title">Linux (x86_64)</span>
-              <span class="dl-size">约 671 MiB</span>
-            </div>
-            <p style="margin-top:10px;">解压后直接运行目录中的启动器 <code>./NaishoNoMahou</code>：</p>
-            <div class="cmd-box" style="margin-top:10px;">
-              <code id="linuxCmd">tar -xjf NaishoNoMahou-1.0.0-linux.tar.bz2 && ./NaishoNoMahou-1.0.0-linux/NaishoNoMahou</code>
-              <button class="copy-btn" id="copyCmdBtn" type="button">复制</button>
-            </div>
-          </div>
-          <a class="btn btn-secondary" href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-linux.tar.bz2">
-            下载 NaishoNoMahou-1.0.0-linux.tar.bz2
-          </a>
+        <table class="spec">
+          <tr>
+            <th>语言支持</th>
+            <td>日语原版 / 简体中文 实时切换（含 UI、剧本、按钮及中文 Logo）</td>
+          </tr>
+          <tr>
+            <th>存档位置</th>
+            <td>默认保存在游戏目录旁的 <code>game/saves/</code></td>
+          </tr>
+        </table>
+      </section>
+
+      <section class="panel" id="shots">
+        <div class="star-bar">
+          <span class="stars-left" aria-hidden="true">
+            <svg width="34" height="28" viewBox="0 0 34 28"><polygon points="15,2 18,10 27,10 20,15 23,23 15,18 7,23 10,15 3,10 12,10" fill="#FFF176" stroke="#FF2E85" stroke-width="1.3"/><polygon points="27,13 28.5,17 33,17 29.5,19.5 31,24 27,21 23,24 24.5,19.5 21,17 25.5,17" fill="#19C2FF"/></svg>
+          </span>
+          游戏截图
+          <span class="stars-right" aria-hidden="true">
+            <svg width="34" height="28" viewBox="0 0 34 28"><polygon points="19,2 22,10 31,10 24,15 27,23 19,18 11,23 14,15 7,10 16,10" fill="#FFF176" stroke="#FF2E85" stroke-width="1.3"/><polygon points="7,13 8.5,17 13,17 9.5,19.5 11,24 7,21 3,24 4.5,19.5 1,17 5.5,17" fill="#19C2FF"/></svg>
+          </span>
         </div>
-      </div>
 
-      <div class="save-banner">
-        <span><strong>绿色便携存档：</strong>存档与全收集解锁进度（<code>persistent</code>）默认保存在游戏目录旁的 <code>game/saves/</code> 内，复制目录即可带走全部进度。</span>
-        <a href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/tag/v1.0.0" target="_blank" rel="noopener" style="color:var(--pink-deep);font-weight:700;">前往 Release 页面 →</a>
-      </div>
-    </section>
-  </main>
+        <div class="shot-grid">
+          <div class="shot-item" data-index="0">
+            <img src="screenshots/01_title_zh.png" alt="标题画面" loading="lazy">
+            <div class="shot-cap">标题界面</div>
+          </div>
+          <div class="shot-item" data-index="1">
+            <img src="screenshots/02_prologue_logo_zh.png" alt="序章中文 Logo" loading="lazy">
+            <div class="shot-cap">序章中文 Logo</div>
+          </div>
+          <div class="shot-item" data-index="2">
+            <img src="screenshots/03_dialogue_zh.png" alt="实机对话" loading="lazy">
+            <div class="shot-cap">实机对话</div>
+          </div>
+          <div class="shot-item" data-index="3">
+            <img src="screenshots/04_cg_gallery_zh.png" alt="CG 相册" loading="lazy">
+            <div class="shot-cap">特典 CG 相册</div>
+          </div>
+        </div>
+      </section>
 
-  <footer>
-    <div class="container footer-inner">
-      <div>
-        <strong>おジャ魔女あどべんちゃ～「ないしょのまほう」</strong> · Ren'Py 8 Port · 原作版权 ©ABC・東映アニメーション / ©AMADA PRINTING MFG. CO., LTD.
-      </div>
-      <div class="footer-links">
-        <a href="https://github.com/dibin666/NaishoNoMahou-renpy" target="_blank" rel="noopener">GitHub 仓库</a>
-        <a href="https://github.com/dibin666/NaishoNoMahou-renpy/releases" target="_blank" rel="noopener">Releases</a>
-        <a href="https://github.com/dibin666/NaishoNoMahou-renpy/blob/main/docs/RESEARCH_AND_ARCHITECTURE.md" target="_blank" rel="noopener">技术架构文档</a>
-      </div>
-    </div>
+      <section class="panel" id="download">
+        <div class="star-bar">
+          <span class="stars-left" aria-hidden="true">
+            <svg width="34" height="28" viewBox="0 0 34 28"><polygon points="15,2 18,10 27,10 20,15 23,23 15,18 7,23 10,15 3,10 12,10" fill="#FFF176" stroke="#FF2E85" stroke-width="1.3"/><polygon points="27,13 28.5,17 33,17 29.5,19.5 31,24 27,21 23,24 24.5,19.5 21,17 25.5,17" fill="#19C2FF"/></svg>
+          </span>
+          下载游玩
+          <span class="stars-right" aria-hidden="true">
+            <svg width="34" height="28" viewBox="0 0 34 28"><polygon points="19,2 22,10 31,10 24,15 27,23 19,18 11,23 14,15 7,10 16,10" fill="#FFF176" stroke="#FF2E85" stroke-width="1.3"/><polygon points="7,13 8.5,17 13,17 9.5,19.5 11,24 7,21 3,24 4.5,19.5 1,17 5.5,17" fill="#19C2FF"/></svg>
+          </span>
+        </div>
+
+        <table class="spec" style="margin-top:0;">
+          <tr>
+            <th>Windows</th>
+            <td>
+              下载 <a href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-win.zip" style="color:var(--colB);font-weight:700;text-decoration:underline;">NaishoNoMahou-1.0.0-win.zip</a>（约 692 MiB），解压后双击 <code>NaishoNoMahou.exe</code>。
+            </td>
+          </tr>
+          <tr>
+            <th>Linux</th>
+            <td>
+              下载 <a href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-linux.tar.bz2" style="color:var(--colB);font-weight:700;text-decoration:underline;">NaishoNoMahou-1.0.0-linux.tar.bz2</a>（约 671 MiB），解压并执行：
+              <div class="run-cmd">
+                <code id="linuxCmd">tar -xjf NaishoNoMahou-1.0.0-linux.tar.bz2 && ./NaishoNoMahou-1.0.0-linux/NaishoNoMahou</code>
+                <button class="copy-btn" id="copyBtn" type="button">复制</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>Release</th>
+            <td>
+              <a href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/tag/v1.0.0" target="_blank" rel="noopener" style="color:var(--colB);font-weight:700;text-decoration:underline;">GitHub Releases v1.0.0</a> · <a href="https://github.com/dibin666/NaishoNoMahou-renpy/blob/main/docs/RESEARCH_AND_ARCHITECTURE.md" target="_blank" rel="noopener" style="color:var(--colB);text-decoration:underline;">移植说明文档</a>
+            </td>
+          </tr>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <footer class="toei-footer">
+    &copy; ABC・東映アニメーション / AMADA PRINTING MFG. CO., LTD. &nbsp;|&nbsp; Ren'Py 8 跨平台移植项目 · <a href="https://github.com/dibin666/NaishoNoMahou-renpy" target="_blank" rel="noopener">GitHub</a>
   </footer>
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="截图预览">
-    <button class="lb-close" id="lbClose" type="button" aria-label="关闭">×</button>
     <div class="lb-box">
-      <button class="lb-btn lb-prev" id="lbPrev" type="button" aria-label="上一张">‹</button>
+      <button class="lb-close" id="lbClose" type="button" aria-label="关闭">×</button>
+      <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="上一张">‹</button>
       <img id="lbImg" src="" alt="">
-      <button class="lb-btn lb-next" id="lbNext" type="button" aria-label="下一张">›</button>
+      <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="下一张">›</button>
       <div class="lb-caption" id="lbCaption"></div>
     </div>
   </div>
@@ -923,65 +680,52 @@
   <script>
     (function () {
       const shots = [
-        { src: "screenshots/01_title_zh.png", caption: "简体中文标题界面 — 小魔女DoReMi冒险 ～「秘密的魔法」～" },
-        { src: "screenshots/02_prologue_logo_zh.png", caption: "序章简体中文游戏 Logo（支持自动播放与点击推进）" },
-        { src: "screenshots/03_dialogue_zh.png", caption: "实机对话演出 — MAHO 堂立绘与双语字幕" },
-        { src: "screenshots/04_cg_gallery_zh.png", caption: "特典 CG 相册 — 全 7 页 44 组 CG 鉴赏，支持差分全图浏览" }
+        { src: "screenshots/01_title_zh.png", caption: "标题界面" },
+        { src: "screenshots/02_prologue_logo_zh.png", caption: "序章中文 Logo" },
+        { src: "screenshots/03_dialogue_zh.png", caption: "实机对话" },
+        { src: "screenshots/04_cg_gallery_zh.png", caption: "特典 CG 相册" }
       ];
-
-      let currentIndex = 0;
-      const stageImg = document.getElementById("stageImg");
-      const stageCaption = document.getElementById("stageCaptionText");
-      const tabs = document.querySelectorAll(".stage-tab");
-
-      function selectStage(idx) {
-        currentIndex = (idx + shots.length) % shots.length;
-        stageImg.src = shots[currentIndex].src;
-        stageImg.alt = shots[currentIndex].caption;
-        stageCaption.textContent = shots[currentIndex].caption.split(" — ")[0];
-        tabs.forEach((btn, i) => btn.classList.toggle("active", i === currentIndex));
-      }
-
-      tabs.forEach((btn) => {
-        btn.addEventListener("click", () => selectStage(Number(btn.dataset.index)));
-      });
-
-      const lightbox = document.getElementById("lightbox");
+      let idx = 0;
+      const lb = document.getElementById("lightbox");
       const lbImg = document.getElementById("lbImg");
-      const lbCaption = document.getElementById("lbCaption");
+      const lbCap = document.getElementById("lbCaption");
 
-      function openLightbox(idx) {
-        currentIndex = (idx + shots.length) % shots.length;
-        lbImg.src = shots[currentIndex].src;
-        lbImg.alt = shots[currentIndex].caption;
-        lbCaption.textContent = shots[currentIndex].caption;
-        lightbox.classList.add("open");
+      function openLb(i) {
+        idx = (i + shots.length) % shots.length;
+        lbImg.src = shots[idx].src;
+        lbImg.alt = shots[idx].caption;
+        lbCap.textContent = shots[idx].caption;
+        lb.classList.add("open");
       }
 
-      function closeLightbox() {
-        lightbox.classList.remove("open");
+      function closeLb() {
+        lb.classList.remove("open");
       }
 
-      document.getElementById("stageViewport").addEventListener("click", () => openLightbox(currentIndex));
-      document.querySelectorAll(".shot-card").forEach((card) => {
-        card.addEventListener("click", () => openLightbox(Number(card.dataset.index)));
+      document.getElementById("heroStage").addEventListener("click", () => openLb(0));
+      document.querySelectorAll(".shot-item").forEach((el) => {
+        el.addEventListener("click", () => openLb(Number(el.dataset.index)));
       });
-
-      document.getElementById("lbClose").addEventListener("click", closeLightbox);
-      document.getElementById("lbPrev").addEventListener("click", () => openLightbox(currentIndex - 1));
-      document.getElementById("lbNext").addEventListener("click", () => openLightbox(currentIndex + 1));
-      lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox) closeLightbox();
-      });
-
+      document.getElementById("lbClose").addEventListener("click", closeLb);
+      document.getElementById("lbPrev").addEventListener("click", () => openLb(idx - 1));
+      document.getElementById("lbNext").addEventListener("click", () => openLb(idx + 1));
+      lb.addEventListener("click", (e) => { if (e.target === lb) closeLb(); });
       document.addEventListener("keydown", (e) => {
-        if (!lightbox.classList.contains("open")) return;
-        if (e.key === "Escape") closeLightbox();
-        if (e.key === "ArrowLeft") openLightbox(currentIndex - 1);
-        if (e.key === "ArrowRight") openLightbox(currentIndex + 1);
+        if (!lb.classList.contains("open")) return;
+        if (e.key === "Escape") closeLb();
+        if (e.key === "ArrowLeft") openLb(idx - 1);
+        if (e.key === "ArrowRight") openLb(idx + 1);
       });
 
-      const copyBtn = document.getElementById("copyCmdBtn");
+      const navBtns = document.querySelectorAll(".sidebar .menu-btn[href^='#']");
+      navBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          navBtns.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+        });
+      });
+
+      const copyBtn = document.getElementById("copyBtn");
       copyBtn.addEventListener("click", async () => {
         const text = document.getElementById("linuxCmd").textContent;
         try {
@@ -989,7 +733,7 @@
           copyBtn.textContent = "已复制";
           setTimeout(() => { copyBtn.textContent = "复制"; }, 1800);
         } catch (_) {
-          copyBtn.textContent = "请手动复制";
+          copyBtn.textContent = "手动复制";
         }
       });
     })();
