@@ -1,6 +1,6 @@
 # 小魔女DoReMi冒险 ～「秘密的魔法」～
 
-**おジャ魔女あどべんちゃ～「ないしょのまほう」** · Ren'Py 8 跨平台移植版（Windows / Linux）
+**おジャ魔女あどべんちゃ～「ないしょのまほう」** · Ren'Py 8 跨平台移植版（[游戏展示页](https://dibin666.github.io/NaishoNoMahou-renpy/)）
 
 将原版 KiriKiri2 视觉小说移植至 Ren'Py 8，免环境点击即玩，支持 **日语原版 / 简体中文** 实时切换。
 
