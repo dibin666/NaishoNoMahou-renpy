@@ -1,0 +1,1375 @@
+# Auto-generated from 02. hazuki/hz_B1.ks by tools/transpile_ks.py
+label kag_hz_b1:
+
+label kag_hz_b1_gamestart:
+    $ kag_history_opt(output=False, enabled=None)
+    if kag_f.re_scenario==1:
+        $ kag_set_rclick(False)
+    $ kag_wait(200, canskip=True)
+    $ kag_cancelskip()
+    $ kag_cm()
+    $ kag_changetype('cross', 'black', time_ms=1500, bgcolor='0x000000')
+    $ kag_changetype('blind01', 'eye_hazuki.tlg', time_ms=1000, bgcolor='0x000000')
+    $ kag_changetype('blind01', 'bg001', time_ms=1000, bgcolor='0x000000')
+    $ kag_mesframe()
+    $ kag_history_opt(output=True, enabled=None)
+
+label kag_hz_b1_hz__dash__01_00:
+    $ kag_set_bookmark('「１日目」ＭＡＨＯ堂って大変！？')
+    $ kag_playbgm('m67', loop=True)
+    $ kag_cm()
+    $ kag_drawchar('d_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0490.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「それじゃさっそく、お仕事の前に、まずはＭＡＨＯ堂の案内だね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('o_05.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('4-0125.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「そうは言っても、案内するほど広いお店じゃないわよ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0114.5.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「でも、りずむちゃんはこれからここで生活するんだし、いろいろ細かいところもちゃんと案内しないと」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0491.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「はいはーい！じゃあ、あたしが案内したげるよ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('a_10.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0169.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「とか言ってどれみちゃん、仕事サボろうとしてるんちゃうん？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0492.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「や、やだなぁ～あいちゃん！{w=0.45}そ、そんなことは……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('o_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('4-0126.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「フフ。{w=0.45}でも、たしかにどれみちゃんの言うことにも一理あるわね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0493.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「で、でしょ～。{w=0.45}さっすがおんぷちゃん！それじゃさっそく……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('o_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('4-0127.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「それじゃ、わたしたちはお仕事はじめてるから、{w=0.45}りずむちゃんの案内は、はづきちゃんにまかせていいかしら？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0115.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「えっ？{w=0.45}ええ、もちろん」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('p_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('7-0104.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ぽっぷ「')
+    "ぽっぷ「そうだね。{w=0.45}はづきちゃんならおねえちゃんとちがって安心だし」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_09.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0494.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「ぽ～っ～ぷ～」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('p_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('7-0105.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ぽっぷ「')
+    "ぽっぷ「へへへ、気にしない気にしな～い」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('a_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0170.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「じゃ決まりやな。{w=0.45}はづきちゃん、よろしくな」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('o_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('4-0128.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「ほらどれみちゃん、お仕事お仕事！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hn_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0082.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「お仕事お仕事～！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0495.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「はーい。{w=0.45}それじゃはづきちゃん、お願いね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0116.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「わかったわ。{w=0.45}それじゃりずむちゃん、まずは１階から案内するわね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「は、はい！{w=0.45}よろしくお願いします！」"
+    $ kag_cm()
+    $ kag_fadeoutbgm(1000)
+    $ kag_freeimage(layer='0', page='back')
+    $ kag_freeimage(layer='3', page='back')
+    $ kag_changetype('cross', 'black', time_ms=1500, bgcolor='0x000000')
+    $ kag_wait(500, canskip=True)
+    $ kag_changetype('cross', 'bg017_b', time_ms=1500, bgcolor='0x000000')
+    $ kag_bgdraw()
+    $ kag_mesframe()
+
+label kag_hz_b1_hz__dash__01_01:
+    $ kag_set_bookmark('「１日目」ＭＡＨＯ堂って大変！？')
+    $ kag_cm()
+    $ kag_playbgm('m60', loop=True)
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0117.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「お店の中は大体こんな感じかしら……。{w=0.55}りずむちゃん、何かわからないこととかある？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「いえ、大丈夫です。{w=0.45}ありがとうございます」"
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「ここは雑貨屋さん……{w=0.6}なんですよね？」"
+    $ kag_cm()
+    $ kag_playse('2-0118.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「ええ。みんなでアクセサリーを作ってるのよ。{w=0.45}あ、お仕事の説明がまだだったわよね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_playse('2-0119.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「それじゃ、次はお仕事の説明を……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hn_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0083.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「はづき！りずむ！{w=0.5}もう案内は終わったの？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0120.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「ええ、これからお仕事の説明をするところよ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hn_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0084.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「ハナちゃんもお仕事の説明する～！りずむ、こっちこっち！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「え？{w=0.45}は、はい！」"
+    $ kag_cm()
+    "ハナちゃんの隣に座る。"
+    extend "はづきちゃんもやって来て、わたしの隣に座る。"
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0121.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「それじゃ、ハナちゃんにも協力してもらおうかしら」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hn_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0085.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「うん！{w=0.5}コホン！それじゃ、ハナちゃんの言うことをよ～く聞くように！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「よ、よろしくお願いします！」"
+    $ kag_cm()
+    $ kag_drawchar('hz_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0122.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「ふふふ、もう、ハナちゃんったら」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hn_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0086.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「えへへ……{w=0.5}えっとね、{w=0.45}これはフラワーリボンメーカーって言うの！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「ふむふむ」"
+    $ kag_cm()
+    $ kag_playse('6-0087.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「これをこうするとね……{w=0.55}ほら！こんなかわいいリボンができるんだよ～！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「うわぁ！{w=0.45}かわいい！」"
+    $ kag_cm()
+    $ kag_drawchar('hn_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0088.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「でしょでしょ～！！えへへ～！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hn_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0089.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「でもハナちゃんはまだ、これとビーズメーカーくらいしかできないんだけどね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0123.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「ビーズメーカーは……{w=0.45}あ、どれみちゃんがつかってるわね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「みなさんすごいですね。{w=0.45}ちゃんとお仕事できて……{w=0.5}わたし、魔女界では失敗ばかりしてて……」"
+    $ kag_cm()
+    $ kag_playse('2-0123.5.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「大丈夫よ。{w=0.45}ほら、りずむちゃんもやってみて」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「えっ？……{w=0.55}でも、わたしにできるかな？」"
+    $ kag_cm()
+    $ kag_drawchar('hn_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0090.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「ハナちゃん、教えてあげる！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0124.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「説明より実際にやってもらう方が、きっと早くできるようになるわ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hn_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0092.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「そうそう！{w=0.35}ハナちゃん先生にまかせなさ～い」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0125.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「それじゃ、わたしもハナちゃん先生の授業を聞かせてもらうわね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hn_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0093.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「うむ！はづきもよ～く聞いておくように！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0126.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「うふふ。よろしくお願いします」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「よ、よろしくお願いします！」"
+    $ kag_cm()
+    $ kag_drawchar('hn_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0094.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「うむうむ！{w=0.45}ではさっそくやってみよう！{w=0.6}まずはこれをこうして……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_freeimage(layer='0', page='back')
+    $ kag_freeimage(layer='1', page='back')
+    $ kag_freeimage(layer='3', page='back')
+    $ kag_changetype('cross', 'black', time_ms=1500, bgcolor='0x000000')
+    $ kag_wait(500, canskip=True)
+    $ kag_changetype('cross', 'bg017_b', time_ms=1500, bgcolor='0x000000')
+    $ kag_bgdraw()
+    $ kag_mesframe()
+
+label kag_hz_b1_hz__dash__01_02:
+    $ kag_set_bookmark('「１日目」ＭＡＨＯ堂って大変！？')
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「で、できた！」"
+    $ kag_cm()
+    $ kag_drawchar('hz_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0127.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「りずむちゃん、上手じゃない！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hn_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0095.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「うむ！{w=0.5}もうハナちゃんが教えることは何もない！{w=0.45}卒業じゃ！！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_08.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0128.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「ず、ずいぶんあっさりしてるわね……{w=0.8}{nw}"
+    $ kag_drawchar('hz_01.tlg', time_ms=100, sepia=False, canskip=True)
+    extend "でもりずむちゃん、本当に上手だわ。{w=0.45}初めてとは思えない」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「そ、そんな……{w=0.6}ハナちゃん、いえ、ハナちゃん先生の教え方が上手だったから……」"
+    $ kag_cm()
+    $ kag_drawchar('hn_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0096.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「えっへん！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0129.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「そうね。{w=0.45}でも、作ったのはりずむちゃんよ。{w=0.45}ハナちゃんが教えて、りずむちゃんががんばって、これを作ったのよ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「わたしが……{w=0.55}作った……{w=0.55}そっか」"
+    $ kag_cm()
+    $ kag_playse('2-0130.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「他にもいろいろやってみましょう！{w=0.5}まずは、さっきハナちゃんが言ってたビーズメーカーからね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「えっ！？は、はい！」"
+    $ kag_cm()
+    $ kag_drawchar('hn_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0097.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「りずむ、がんばってね～」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「は、はい！{w=0.35}がんばります！」"
+    $ kag_cm()
+    $ kag_freeimage(layer='0', page='back')
+    $ kag_freeimage(layer='1', page='back')
+    $ kag_freeimage(layer='3', page='back')
+    $ kag_changetype('note', 'bg005', time_ms=1500, bgcolor='0x000000')
+    $ kag_mesframe()
+
+label kag_hz_b1_hz__dash__01_03:
+    $ kag_set_bookmark('「１日目」ＭＡＨＯ堂って大変！？')
+    $ kag_cm()
+    $ kag_drawchar('d_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0496.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「あっ！{w=0.55}はづきちゃん、りずむちゃん」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0131.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「どれみちゃん、おつかれさま」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「おつかれさまです」"
+    $ kag_cm()
+    $ kag_drawchar('d_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0497.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「おつかれっス～！{w=0.35}ＭＡＨＯ堂の案内は終わったの？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0132.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「ええ。それで今度はりずむちゃんに、ＭＡＨＯ堂でのお仕事を実際に体験してもらうことにしたの。どれみちゃん、よろしくね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_05.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0498.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「えっ！あたしが～！？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「どれみ先生！{w=0.3}よろしくお願いします！！」"
+    $ kag_cm()
+    $ kag_drawchar('d_07.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0499.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「へっ？{w=0.55}せ、先生……？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「はい！{w=0.35}どれみ先生！」"
+    $ kag_cm()
+    $ kag_drawchar('d_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0500.1.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「先生なんて照れるなぁ～。"
+    $ kag_playse('1-0500.2', buf=0, loop=False)
+    extend "でも何で先生なの？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0133.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「ふふふ、さっきハナちゃんがね……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0501.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「あはは、そういうことかぁ～。{w=0.45}ハナちゃんらしいね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0502.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「りずむちゃん、まぁそんなに固くならないでいいよ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「はい！{w=0.45}よろしくお願いします！」"
+    $ kag_cm()
+    $ kag_drawchar('d_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0503.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「だ、だからそんなにかしこまらないでってば～」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「は、はい！じゃなかった。うん！」"
+    $ kag_cm()
+    $ kag_drawchar('d_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0504.1.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「よ～し、それじゃまずはこの道具の説明からね。{w=0.5}これはビーズメーカーって言って……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_03.tlg', time_ms=100, sepia=False, canskip=True)
+    $ kag_playse('1-0504.2', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「えーと、ほら、その、いろいろなことができるんだよ！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「いろいろ、ですか？」"
+    $ kag_cm()
+    $ kag_drawchar('d_06.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0505.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「ええっと、え～……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0134.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「これでビーズを使ったブレスレットとかネックレスとか小物が作れるのよ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0506.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「そ、そうそう！{w=0.45}そんな感じ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0135.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「ふふ。{w=0.45}じゃあさっそくやってみましょう」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0507.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「そうそう！{w=0.45}こういうのは説明より実際にやってみるのがイチバン！{w=0.5}ほらよく言うじゃん。{w=0.45}『新聞は一面に広告』って」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('m_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('5-0108.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ももこ「')
+    "ももこ「ちがうよどれみちゃん、それをいうなら『新聞を読めば棚から小判』だよ！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_08.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0136.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「『百聞は一見にしかず』よ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('m_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('5-0109.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ももこ「')
+    "ももこ「さすがはづきちゃん～！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0508.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「そうそう、それそれ～！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「ふふっ」"
+    $ kag_cm()
+    $ kag_drawchar('d_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0509.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「それじゃりずむちゃん。{w=0.45}まずはここからビーズを入れて……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「えっと……{w=0.5}これでいいのかな？」"
+    $ kag_cm()
+    $ kag_playse('1-0510.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「そうそう。{w=0.45}それじゃ次は……{w=0.45}えっと、糸はもうセットしてあるから、このハンドルをゆっくり回してみて」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「うん……{w=0.55}えっと、こうですか？」"
+    $ kag_cm()
+    $ kag_playse('1-0511.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「そうそう。{w=0.5}そうするとほら、ここからビーズがつながって出てくるの」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「うわぁ……{w=0.55}きれ～い！」"
+    $ kag_cm()
+    $ kag_drawchar('d_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0512.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「でしょでしょ～！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0137.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「こうやって、できたビーズを組み合わせて、小物を作るのよ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0513.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「最初に入れるビーズの組み合わせで、色んなふうにできるんだよ！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「そうなんですか～」"
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0138.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「どれみちゃん、ちょっと……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_07.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0514.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「え？{w=0.6}なになに？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0139.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「あのね……{w=0.65}ゴニョゴニョ……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0515.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「あ、それはナイスアイディア！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_07.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0140.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「どれみちゃん！シーッ！！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「？」"
+    $ kag_cm()
+    $ kag_drawchar('d_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0516.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「え！？{w=0.45}えっと……{w=0.45}へへへへへ～」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0141.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「りずむちゃん。{w=0.45}それじゃ次に行きましょうか！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「え？{w=0.55}う、うん。どれみちゃん、ありがとう」"
+    $ kag_cm()
+    $ kag_drawchar('d_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0517.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「どういたしまして」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0142.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「次は糸つむぎ機ね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_freeimage(layer='0', page='back')
+    $ kag_freeimage(layer='1', page='back')
+    $ kag_freeimage(layer='3', page='back')
+    $ kag_changetype('note', 'bg004', time_ms=1500, bgcolor='0x000000')
+    $ kag_mesframe()
+
+label kag_hz_b1_hz__dash__01_04:
+    $ kag_set_bookmark('「１日目」ＭＡＨＯ堂って大変！？')
+    $ kag_cm()
+    $ kag_drawchar('a_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0171.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「よっ。{w=0.55}はづきちゃん、りずむちゃん」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('o_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('4-0129.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「話は聞こえてたわ。{w=0.4}りずむちゃんにお仕事を体験してもらってるのよね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0143.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「そうなの。{w=0.4}あいちゃん、おんぷちゃん。{w=0.55}りずむちゃんに糸つむぎのやり方を教えてあげてくれるかしら？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「お願いします」"
+    $ kag_cm()
+    $ kag_drawchar('a_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0172.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「よっしゃ！まかしとき！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('o_05.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('4-0130.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「ところではづきちゃん。{w=0.5}さっきどれみちゃんが何かさわいでたみたいだったけど？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0144.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「あ、えっと……{w=0.6}大したことじゃないのよ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('a_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0173.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「ほなさっそく体験……{w=0.65}の前に、さすがにこれは少しは説明せなあかんか」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0145.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「じゃあおんぷちゃん。{w=0.35}説明してくれる？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('o_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('4-0131.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「ええ。{w=0.3}わかったわ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_playse('4-0132.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「えっと、これは糸つむぎ機って言って、その名の通り糸をつむぐ機械なの」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_playse('4-0133.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「これでつむいだ糸を使って、あっちのはた織り機で布を織ったりするのよ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    "はた織り機の方を見ると、ももちゃんがはた織りをしている。"
+    $ kag_cm()
+    $ kag_drawchar('a_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0174.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「はた織り機の説明は後でええかな？{w=0.4}ほな、りずむちゃん、こっち来てやってみよか」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「あ、はい」"
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0146.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「それでおんぷちゃん……{w=0.55}ゴニョゴニョ……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('o_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('4-0134.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「なるほど……{w=0.55}うん、それいいわね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('a_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0175.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「おんぷちゃ～ん。{w=0.25}そっちよろしくな～」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('o_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('4-0135.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「あ、オッケー。{w=0.5}はづきちゃん、あいちゃんにはわたしから伝えておくわね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0147.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「うん。よろしくねおんぷちゃん」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('a_07.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0176.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「お～い。{w=0.5}２人で何話してんの～？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0148.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「あ、ごめんなさいあいちゃん」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('a_07.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0177.1.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「ん？まぁええけど……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('a_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0177.2', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「ほな、りずむちゃん、まずはこのハンドルを回してみて。{w=0.3}あ、ゆっくりやで」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「はい。えっと……{w=0.45}これくらい？」"
+    $ kag_cm()
+    $ kag_playse('3-0178.1.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「そうそう。ええ感じや。"
+    $ kag_playse('3-0178.2', buf=0, loop=False)
+    extend "そしたら糸があっちに巻き取られるんやけど、そのときにあっちは糸がからまへんようにすんねんで」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0149.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「糸つむぎは２人でやる作業なのよね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('a_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0179.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「そうそう。{w=0.4}２人で息を合わせてやるのがコツやね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「む、むずかしそうですね……」"
+    $ kag_cm()
+    $ kag_playse('3-0180.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「んなことない。{w=0.55}２人で協力してやればこんなん簡単や。{w=0.4}なぁおんぷちゃん」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('o_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('4-0136.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「そうね。あ、りずむちゃん、こっちもやってみる？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「あ、はい」"
+    $ kag_cm()
+    $ kag_drawchar('a_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0181.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「ほなこっちはあたしがやるから、りずむちゃんはおんぷちゃんにあっちの方を教わってな」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「わかりました」"
+    $ kag_cm()
+    $ kag_freeimage(layer='0', page='back')
+    $ kag_freeimage(layer='3', page='back')
+    $ kag_changetype('cross', 'black', time_ms=1500, bgcolor='0x000000')
+    $ kag_wait(500, canskip=True)
+    $ kag_changetype('note', 'bg004', time_ms=1500, bgcolor='0x000000')
+    $ kag_mesframe()
+
+label kag_hz_b1_hz__dash__01_05:
+    $ kag_set_bookmark('「１日目」ＭＡＨＯ堂って大変！？')
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「ん～、やっぱりむずかしいです……」"
+    $ kag_cm()
+    $ kag_drawchar('a_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0182.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「いやいやりずむちゃん。{w=0.3}ちゃんとできてんで」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('o_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('4-0137.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「そうよ。{w=0.3}この調子ならすぐになれると思うわ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0150.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「ええ、わたしもそう思う」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「そうでしょうか……？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('a_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0183.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「さてと、ほんなら次ははた織り機やけど……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('o_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('4-0138.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「はた織り機は……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_08.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0151.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「みんな、完全には使えてないのよね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「え、そうなんですか？」"
+    $ kag_cm()
+    $ kag_playse('2-0152.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「実はそうなの……{w=0.55}使う分にはなんとかできるんだけど……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0153.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「あれ？ももちゃんは？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('o_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('4-0139.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「ももちゃんならさっき、キッチンの方に行ったわよ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0154.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「あ、じゃあわたしもももちゃんを手伝うわ。{w=0.45}りずむちゃん、先に上で待っててくれる？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「はい」"
+    $ kag_cm()
+    $ kag_freeimage(layer='0', page='fore')
+    $ kag_playse('3-0185.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「ええ考えやなそれ！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_playse('5-0110.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ももこ「')
+    "ももこ「Oh！ It's a good idea！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    "……なんだろう？"
+    $ kag_cm()
+    $ kag_fadeoutbgm(1000)
+    $ kag_freeimage(layer='0', page='back')
+    $ kag_freeimage(layer='3', page='back')
+    $ kag_changetype('note', 'bg017_b', time_ms=1500, bgcolor='0x000000')
+    $ kag_bgdraw()
+    $ kag_mesframe()
+
+label kag_hz_b1_hz__dash__01_06:
+    $ kag_set_bookmark('「１日目」ＭＡＨＯ堂って大変！？')
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0155.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「りずむちゃん、お待たせ。{w=0.5}\n{nw}"
+    $ kag_drawchar('hz_02.tlg', time_ms=600, sepia=False, canskip=True)
+    extend "あ、ハナちゃんおつかれさま」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hn_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0098.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「わ～い！{w=0.2}おやつおやつ～」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「あ、ありがとうはづきちゃん……{w=0.5}あれ？みんなは？」"
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0156.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「もうすぐ来るわ。{w=0.3}それよりりずむちゃん。{w=0.25}実際にＭＡＨＯ堂のお仕事を体験してみて、どうだった？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「う～ん、わたしにお手伝いできるのかな？って思いました……」"
+    $ kag_cm()
+    $ kag_drawchar('hn_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0099.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「え～っ！でもりずむ、リボン上手だったよ～！？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0157.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「そうね。{w=0.35}それにビーズメーカーもちゃんと使えたし、糸つむぎだってそうだわ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「でも……{w=0.55}みなさんとてもお上手だし……{w=0.55}わたしなんか……」"
+    $ kag_cm()
+    $ kag_drawchar('hz_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0158.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「それじゃあ……{w=0.6}楽しくなかった？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「そっ、そんなことないです」"
+    $ kag_cm()
+    $ kag_drawchar('hz_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0159.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「なら大丈夫よ。{w=0.4}楽しくお仕事していれば、すぐに上手になるわ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「そうでしょうか？そうだといいんですけど……」"
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0160.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「ええ、今日りずむちゃんが作ったのだって……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('a_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0186.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「はづきちゃん、お待たせ～！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('m_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('5-0111.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ももこ「')
+    "ももこ「とってもGoodな感じにできたよ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「できたって……{w=0.55}何がですか？」"
+    $ kag_cm()
+    $ kag_freeimage(layer='0', page='fore')
+    "どれみちゃん、あいちゃん、おんぷちゃん、ももちゃんはお互いに目配せをして……"
+    $ kag_cm()
+    $ kag_playse('A-0015.ogg', buf=0, loop=False)
+    $ kag_history_opt(output=False, enabled=None)
+    $ kag_history_opt(output=True, enabled=None)
+    $ kag_set_next_indent('「')
+    "「ジャ～～～ン！！！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「えっ？{w=0.4}あ！これって……」"
+    $ kag_cm()
+    "テーブルの上に、ビーズのブレスレットが置かれる。"
+    $ kag_cm()
+    $ kag_drawchar('hz_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0161.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「今日りずむちゃんが作ったビーズを使ったのよ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('a_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0187.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「仕上げはあたしらがやったんやけどな」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0519.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「つっても、留め金をつけたりしただけだけどね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('o_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('4-0141.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「かざりのひもも、りずむちゃんがつむいだ糸を使ったのよ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('m_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('5-0112.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ももこ「')
+    "ももこ「と～ってもCuteなブレスレットのでき上がり～！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「わたしが作ったビーズで……」"
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0162.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「仕上げだって、すぐにできるようになるわ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「こんなにキレイなブレスレットを……。本当ですか？」"
+    $ kag_cm()
+    $ kag_drawchar('a_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0188.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「心配いらんって」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('m_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('5-0113.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ももこ「')
+    "ももこ「でもそのブレスレット、ホントにカワイイね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0520.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「そのまま売り物にできちゃうよ～」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('o_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('4-0142.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「どれみちゃんが作ったのより売れそうよね。{w=0.3}\n{nw}"
+    $ kag_drawchar('o_03.tlg', time_ms=100, sepia=False, canskip=True)
+    extend "あ、いけない」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_06.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0521.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「お、おんぷちゃんちょっとヒドイ……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0163.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「りずむちゃんさえよければ、このままお店に並べたいわね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「ええっ！いいんですか！？{w=0.35}その……{w=0.55}わたしなんかが作った……」"
+    $ kag_cm()
+    $ kag_drawchar('hz_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0164.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「もちろんよ！これからもいっぱい作って、どんどんならべちゃいましょ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    "わたしが作ったビーズがお店に並ぶんだ……。"
+    $ kag_cm()
+    $ kag_drawchar('hn_06.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0100.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「ずるいずるい～！{w=0.25}\nハナちゃんも何かしたかったのに～！！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('o_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('4-0143.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「あら、ハナちゃんにはこれから手伝ってもらうのよ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hn_07.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0101.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「へ？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0165.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「ハナちゃんが作ったリボンを使って、売り場にかざるのよ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('a_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0189.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「りずむちゃんの初作品やもんな。{w=0.35}目立つようにせな！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('m_10.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('5-0114.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ももこ「')
+    "ももこ「『りずむちゃん作　第１号！』とか書いちゃえ～！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「えっと、それは照れちゃいます……」"
+    $ kag_cm()
+    $ kag_drawchar('hn_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0102.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「よ～し！ハナちゃんい～っぱいリボン作っちゃうんだから！……{w=0.5}{nw}"
+    $ kag_drawchar('hn_06.tlg', time_ms=600, sepia=False, canskip=True)
+    extend "あ、でもその前に、ハナちゃんおなかすいた～」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_06.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0522.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「あたしもおなかすいたよぅ～」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0166.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「とりあえずお茶にしましょうか」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_freeimage(layer='0', page='back')
+    $ kag_freeimage(layer='1', page='back')
+    $ kag_freeimage(layer='3', page='back')
+    $ kag_changetype('cross', 'black', time_ms=1500, bgcolor='0x000000')
+    $ kag_wait(500, canskip=True)
+    $ kag_changetype('cross', 'bg017_b', time_ms=1500, bgcolor='0x000000')
+    $ kag_bgdraw()
+    $ kag_mesframe()
+
+label kag_hz_b1_hz__dash__01_07:
+    $ kag_set_bookmark('「１日目」ＭＡＨＯ堂って大変！？')
+    $ kag_cm()
+    $ kag_playbgm('m67', loop=True)
+    $ kag_drawchar('d_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0522.5.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「はうぅ～{w=0.3}満足満足……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('a_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0190.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「どれみちゃんにハナちゃん、ちょと食べ過ぎちゃう？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('o_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('4-0144.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「たしかにおいしかったけど、そんなに食べなくても」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('m_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('5-0115.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ももこ「')
+    "ももこ「２人ともおなか出てるよ～」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_08.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0167.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「きっと太るわ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「ふふふ……」"
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「あ、そうだ。{w=0.3}ひとつ聞きたいことがあるんですけど……」"
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0168.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「え？{w=0.3}何かしら？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「あ、えっと、聞きたいことって言うか、疑問に思ったことなんですけど……{w=0.55}今日ずっと、お客さんが来なかったような……」"
+    $ kag_cm()
+    $ kag_drawchar('d_05.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0523.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「え！{w=0.3}そ、それは……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('a_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0191.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「なんちゅうか、その……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_08.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0169.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「え、えっとね、りずむちゃん、つまりそれは……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hn_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0103.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「あのね、今日はりずむがお仕事を最初にする日だから、{w=0.4}お店しめて色々おしえてあげようってことにしたんだよ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_pausebgm()
+    $ kag_drawchar('d_05.tlg', time_ms=100, sepia=False, canskip=True)
+    $ kag_playse('1-0523.5.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「っ！」{nw}"
+    $ kag_ws(buf=0, canskip=True)
+    $ kag_cm()
+    $ kag_drawchar('hz_04.tlg', time_ms=100, sepia=False, canskip=True)
+    $ kag_playse('2-0169.5.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「っ！」{nw}"
+    $ kag_ws(buf=0, canskip=True)
+    $ kag_cm()
+    $ kag_drawchar('a_05.tlg', time_ms=100, sepia=False, canskip=True)
+    $ kag_playse('3-0191.5.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「っ！」{nw}"
+    $ kag_ws(buf=0, canskip=True)
+    $ kag_cm()
+    $ kag_drawchar('o_03.tlg', time_ms=100, sepia=False, canskip=True)
+    $ kag_playse('4-0145.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「っ！」{nw}"
+    $ kag_ws(buf=0, canskip=True)
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('m_06.tlg', time_ms=100, sepia=False, canskip=True)
+    $ kag_playse('5-0116.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ももこ「')
+    "ももこ「っ！」{nw}"
+    $ kag_ws(buf=0, canskip=True)
+    $ kag_cm()
+    $ kag_drawchar('hz_04.tlg', time_ms=100, sepia=False, canskip=True)
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「あの、わたしのためにお店を閉めちゃったんですか？」"
+    $ kag_cm()
+    $ kag_resumebgm()
+    $ kag_drawchar('a_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0192.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「まあ、そういうわけでもないねんけど」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0169.6.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「どうせなら、お客さんのいないところでしっかり覚えた方がいいと思って」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('m_03.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('5-0117.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ももこ「')
+    "ももこ「ダメだよハナちゃん。ナイショって約束したでしょう？」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hn_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('6-0104.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('ハナ\u3000「')
+    "ハナ　「あ、ごめんね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('o_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('4-0146.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('おんぷ「')
+    "おんぷ「これからは、りずむちゃんも手伝ってくれるから、１日くらい休んだって取り戻せるわ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('a_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('3-0193.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('あいこ「')
+    "あいこ「うん。{w=0.3}今日みたいなかわいいアクセサリーとかいっぱい作って……」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('d_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('1-0525.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('どれみ「')
+    "どれみ「バンバン売っちゃおう～！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_freeimage(layer='0', page='fore')
+    $ kag_playse('A-0017.ogg', buf=0, loop=False)
+    $ kag_history_opt(output=False, enabled=None)
+    $ kag_history_opt(output=True, enabled=None)
+    $ kag_set_next_indent('「')
+    "「お～！！」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_drawchar('hz_01.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0170.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「えっと……{w=0.55}りずむちゃん、こんなわたしたちだけどよろしくね」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_set_next_indent('りずむ「')
+    "りずむ「はい！{w=0.3}こちらこそ！」"
+    $ kag_cm()
+    $ kag_drawchar('hz_02.tlg', time_ms=600, sepia=False, canskip=True)
+    $ kag_playse('2-0171.ogg', buf=0, loop=False)
+    $ kag_set_next_indent('はづき「')
+    "はづき「じゃあ、あらためてりずむちゃん、ＭＡＨＯ堂へようこそ」"
+    $ kag_stopse(buf=0)
+    $ kag_cm()
+    $ kag_fadeoutbgm(1000)
+    $ kag_freeimage(layer='0', page='back')
+    $ kag_freeimage(layer='1', page='back')
+    $ kag_freeimage(layer='3', page='back')
+    $ persistent.hz1_s=1
+    if kag_f.re_scenario==1:
+        jump kag_extra_return_s
+    jump kag_hz_b2_gamestart
+    return

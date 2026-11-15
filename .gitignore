@@ -1,0 +1,32 @@
+# Original game disc / patch assets (not tracked)
+おジャ魔女あどべんちゃ～「ないしょのまほう」/
+No CD Patch/
+drafts/
+
+# Packaged distributions & build artifacts
+dist/
+renpy_project/tmp/
+renpy_project/icon.ico
+
+# Extracted/converted media & font assets (~708 MB; bundled in Release builds)
+renpy_project/game/audio/
+renpy_project/game/images/
+renpy_project/game/video/
+renpy_project/game/fonts/
+
+# Ren'Py runtime cache, saves, logs, and compiled bytecode
+*.rpyc
+*.rpyb
+*.rpymc
+renpy_project/game/cache/
+renpy_project/game/saves/
+renpy_project/log.txt
+renpy_project/errors.txt
+renpy_project/traceback.txt
+
+# Python & C build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.so
+*.o
