@@ -144,7 +144,7 @@ init python:
                         self.backend = "win32"
                         store._kag_native_menubar_active = True
                         return True
-                elif sys.platform == "darwin":
+                elif sys.platform == "darwin" and not renpy.ios and not renpy.mobile:
                     if self._init_macos_cocoa():
                         self.active = True
                         self.backend = "cocoa"

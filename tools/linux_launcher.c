@@ -1,13 +1,31 @@
 /* Minimal static ELF launcher for Ren'Py Linux distributions.
  * Ensures X11 SDL backend when DISPLAY is present (for native GTK3 menu bar),
- * then execs lib/py3-linux-x86_64/NaishoNoMahou relative to this binary's directory.
+ * then execs lib/py3-linux-<arch>/NaishoNoMahou relative to this binary's directory.
  */
 #define _POSIX_C_SOURCE 200809L
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/utsname.h>
 #include <unistd.h>
+
+static const char *detect_renpy_arch(void) {
+    struct utsname uts;
+    if (uname(&uts) != 0) {
+        return "x86_64";
+    }
+    if (strcmp(uts.machine, "x86_64") == 0 || strcmp(uts.machine, "amd64") == 0) {
+        return "x86_64";
+    }
+    if (strcmp(uts.machine, "aarch64") == 0 || strcmp(uts.machine, "arm64") == 0) {
+        return "aarch64";
+    }
+    if (strncmp(uts.machine, "armv7", 5) == 0) {
+        return "armv7l";
+    }
+    return "x86_64";
+}
 
 int main(int argc, char **argv) {
     char exe_path[PATH_MAX];
@@ -32,8 +50,9 @@ int main(int argc, char **argv) {
         setenv("SDL_VIDEODRIVER", "x11", 0);
     }
 
+    const char *arch = detect_renpy_arch();
     char target[PATH_MAX];
-    int written = snprintf(target, sizeof(target), "%s/lib/py3-linux-x86_64/NaishoNoMahou", exe_path);
+    int written = snprintf(target, sizeof(target), "%s/lib/py3-linux-%s/NaishoNoMahou", exe_path, arch);
     if (written < 0 || (size_t)written >= sizeof(target)) {
         fprintf(stderr, "Target launcher path too long\n");
         return 127;

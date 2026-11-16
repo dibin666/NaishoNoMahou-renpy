@@ -7,6 +7,13 @@ drafts/
 dist/
 renpy_project/tmp/
 renpy_project/icon.ico
+renpy_project/icon.icns
+renpy_project/web-icon.png
+renpy_project/web-presplash.jpg
+renpy_project/android-icon_foreground.png
+renpy_project/android-icon_background.png
+renpy_project/android-presplash.jpg
+*.keystore
 
 # Extracted/converted media & font assets (~708 MB; bundled in Release builds)
 renpy_project/game/audio/

@@ -17,7 +17,8 @@ define config.default_afm_time = 10
 
 define config.window_icon = "gui/window_icon.png"
 # Store saves & persistent data inside the portable game directory (<game_root>/game/saves/)
-define config.save_directory = None
+# on Windows/Linux; use platform writable storage on macOS (.app / App Translocation) and Web (IDBFS).
+define config.save_directory = "NaishoNoMahou" if (renpy.macintosh or renpy.emscripten) else None
 define config.thumbnail_width = 133
 define config.thumbnail_height = 100
 define config.history_length = 2000
@@ -70,6 +71,9 @@ init python:
     build.classify("game/**.rpyc", "scripts")
     build.classify("game/tl/**", "scripts")
 
-    build.package("linux", "tar.bz2", "linux linux_arm renpy all", description="Linux x86_64")
+    build.mac_info_plist["CFBundleIdentifier"] = "io.github.dibin666.naishonomahou"
+
+    build.package("linux", "tar.bz2", "linux linux_arm renpy all", description="Linux x86_64 / ARM64")
     build.package("win", "zip", "windows renpy all", description="Windows x86_64")
-    build.package("pc", "zip", "windows linux renpy all", description="Windows and Linux x86_64")
+    build.package("mac", "app-zip app-dmg", "mac renpy all", description="macOS Universal (Apple Silicon + Intel)")
+    build.package("pc", "zip", "windows linux linux_arm renpy all", description="Windows and Linux")

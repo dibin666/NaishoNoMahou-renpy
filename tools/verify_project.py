@@ -481,6 +481,8 @@ def check_sdk_and_launchers() -> list[str]:
     for req in [
         sdk / "renpy.sh",
         sdk / "lib" / "py3-linux-x86_64",
+        sdk / "lib" / "py3-linux-aarch64",
+        sdk / "lib" / "py3-mac-universal",
         sdk / "lib" / "py3-windows-x86_64",
         ROOT_DIR / "run_linux.sh",
         ROOT_DIR / "build_distributions.sh",
@@ -490,7 +492,7 @@ def check_sdk_and_launchers() -> list[str]:
     for sh in [ROOT_DIR / "run_linux.sh", ROOT_DIR / "build_distributions.sh"]:
         if sh.exists() and not os.access(sh, os.X_OK):
             errors.append(f"Script is not executable: {sh}")
-    print("[OK] Launchers & SDK: Linux + Windows targets ready")
+    print("[OK] Launchers & SDK: Linux (x86_64 + aarch64) + macOS Universal + Windows targets ready")
     return errors
 
 
