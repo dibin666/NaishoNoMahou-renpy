@@ -146,6 +146,8 @@ init -5 python:
         nb = globals().get("_kag_native_menubar")
         if nb is not None:
             nb.ensure_initialized()
+        if "kag_apply_android_orientation" in globals() and kag_is_android_ui():
+            kag_apply_android_orientation()
 
     config.start_callbacks.append(kag_sync_on_start)
     config.after_load_callbacks.append(kag_apply_typography)

@@ -282,7 +282,7 @@ def check_fonts() -> list[str]:
     }
     ui_files = [
         GAME_DIR / name
-        for name in ("screens_kag.rpy", "i18n.rpy", "options.rpy", "kag_runtime.rpy")
+        for name in ("screens_kag.rpy", "android_ui.rpy", "i18n.rpy", "options.rpy", "kag_runtime.rpy")
         if (GAME_DIR / name).is_file()
     ]
     ui_chars = {

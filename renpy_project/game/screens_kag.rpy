@@ -129,6 +129,9 @@ init python:
         def ensure_initialized(self):
             if self.active or self.backend == "unavailable":
                 return self.active
+            if "kag_is_android_ui" in globals() and kag_is_android_ui():
+                self.backend = "unavailable"
+                return False
             if os.environ.get("SDL_VIDEODRIVER") == "dummy":
                 return False
             try:
@@ -1720,7 +1723,7 @@ screen kag_menubar_hotspot():
             key "alt_K_h" action Function(_kag_native_menubar.open_gtk_menu, "top_help")
         key "rollback" action If(kag_history_enabled and not kag_in_title and not kag_in_overlay_menu(), true=Function(kag_open_history), false=NullAction())
     timer 0.02 repeat True action If(_kag_native_menu_queue, true=Function(kag_dispatch_native_menu_action), false=NullAction())
-    if not _kag_nm_ok and not _kag_native_menubar_active and not renpy.get_screen("kag_menubar"):
+    if not kag_is_android_ui() and not _kag_nm_ok and not _kag_native_menubar_active and not renpy.get_screen("kag_menubar"):
         use kag_menubar
 
 screen kag_menubar():
@@ -2002,14 +2005,15 @@ screen kag_save_load(mode="save", from_load_ks=False, from_rclick=False):
 screen kag_comment_editor():
     modal True
     zorder 140
-    frame align (0.5, 0.5) xsize 500 padding (20, 16) background "#2d102aee":
-        vbox spacing 12:
-            text kag_tr("コメント編集 (データ {})").format((_kag_editing_comment_slot or 0) + 1) size 16 color "#ffffff"
-            frame background "#ffffff" padding (6, 6) xfill True:
-                input value VariableInputValue("_kag_editing_comment_text") length 48 font kag_get_active_font() color "#000000" size 15
-            hbox spacing 16 xalign 1.0:
-                textbutton kag_tr("キャンセル") action [SetVariable("_kag_editing_comment_slot", None), Hide("kag_comment_editor")]
-                textbutton kag_tr("決定") action [Function(kag_update_slot_comment, _kag_editing_comment_slot, _kag_editing_comment_text), SetVariable("_kag_editing_comment_slot", None), Hide("kag_comment_editor")]
+    fixed xysize (800, 600):
+        frame align (0.5, 0.5) xsize 500 padding (20, 16) background "#2d102aee":
+            vbox spacing 12:
+                text kag_tr("コメント編集 (データ {})").format((_kag_editing_comment_slot or 0) + 1) size 16 color "#ffffff"
+                frame background "#ffffff" padding (6, 6) xfill True:
+                    input value VariableInputValue("_kag_editing_comment_text") length 48 font kag_get_active_font() color "#000000" size 15
+                hbox spacing 16 xalign 1.0:
+                    textbutton kag_tr("キャンセル") action [SetVariable("_kag_editing_comment_slot", None), Hide("kag_comment_editor")]
+                    textbutton kag_tr("決定") action [Function(kag_update_slot_comment, _kag_editing_comment_slot, _kag_editing_comment_text), SetVariable("_kag_editing_comment_slot", None), Hide("kag_comment_editor")]
 
 # Scrollbar styles (explicit xsize/ysize prevents Side from collapsing viewport width to 0)
 style vscrollbar:
@@ -2036,15 +2040,15 @@ screen history():
 
     add Solid("#000000e0", xysize=(800, 600))
 
-    # Top-right close button [×] placed below the 26px fixed top menu bar
+    # Top-right close button [×] placed below the 26px fixed top menu bar (larger tap target on Android)
     textbutton "×":
-        xpos 774
-        ypos 28
-        xsize 24
-        ysize 24
+        xpos (744 if kag_is_android_ui() else 774)
+        ypos (8 if kag_is_android_ui() else 28)
+        xsize (48 if kag_is_android_ui() else 24)
+        ysize (48 if kag_is_android_ui() else 24)
         background "#440033"
         hover_background "#ff0099"
-        text_size 16
+        text_size (24 if kag_is_android_ui() else 16)
         text_color "#ffffff"
         text_align (0.5, 0.5)
         action Return()
@@ -2081,21 +2085,22 @@ screen kag_input_dialog(prompt="", title="", default_val=""):
     zorder 115
     default spell_buf = default_val or ""
 
-    add Solid("#000000aa", xysize=(800, 600))
-    frame align (0.5, 0.5) xsize 520 padding (24, 20) background "#fff5faee":
-        vbox spacing 12:
-            text (kag_tr(title) if title else kag_tr("文字入力")) size 18 bold True color "#cc0066"
-            text (kag_tr(prompt) if prompt else kag_tr("※20文字以内で入力してください。")) size 14 color "#222222"
-            frame background "#ffffff" padding (8, 6) xfill True:
-                input value ScreenVariableInputValue("spell_buf") length 24 font kag_get_active_font() color "#000000" size 18
-            hbox spacing 16 xalign 1.0:
-                textbutton kag_tr("決定"):
-                    background "#ff0099"
-                    hover_background "#ff33aa"
-                    padding (18, 6)
-                    text_color "#ffffff"
-                    text_size 16
-                    action Return(spell_buf)
+    fixed xysize (800, 600):
+        add Solid("#000000aa", xysize=(800, 600))
+        frame align (0.5, 0.5) xsize 520 padding (24, 20) background "#fff5faee":
+            vbox spacing 12:
+                text (kag_tr(title) if title else kag_tr("文字入力")) size 18 bold True color "#cc0066"
+                text (kag_tr(prompt) if prompt else kag_tr("※20文字以内で入力してください。")) size 14 color "#222222"
+                frame background "#ffffff" padding (8, 6) xfill True:
+                    input value ScreenVariableInputValue("spell_buf") length 24 font kag_get_active_font() color "#000000" size 18
+                hbox spacing 16 xalign 1.0:
+                    textbutton kag_tr("決定"):
+                        background "#ff0099"
+                        hover_background "#ff33aa"
+                        padding (18, 6)
+                        text_color "#ffffff"
+                        text_size 16
+                        action Return(spell_buf)
 
 # About Modal matching others/about.ks
 screen kag_about_dialog():
@@ -2103,19 +2108,20 @@ screen kag_about_dialog():
     zorder 140
     on "hide" action Function(kag_on_overlay_screen_hide, "kag_about_dialog")
     key "K_ESCAPE" action Hide("kag_about_dialog")
-    add Solid("#00000088", xysize=(800, 600))
-    frame align (0.5, 0.5) xsize 460 padding (24, 20) background "#fff5faf5":
-        vbox spacing 12 xfill True:
-            text kag_tr("このソフトについて") size 20 bold True color "#cc0066"
-            text kag_tr("おジャ魔女あどべんちゃ～「ないしょのまほう」") size 16 bold True color "#222222"
-            text (kag_tr("Ren'Py 移植版") + "  Ver " + config.version) size 14 color "#555555"
-            textbutton kag_tr("閉じる"):
-                xalign 1.0
-                background "#ff0099"
-                hover_background "#ff33aa"
-                padding (16, 6)
-                text_color "#ffffff"
-                action Hide("kag_about_dialog")
+    fixed xysize (800, 600):
+        add Solid("#00000088", xysize=(800, 600))
+        frame align (0.5, 0.5) xsize 460 padding (24, 20) background "#fff5faf5":
+            vbox spacing 12 xfill True:
+                text kag_tr("このソフトについて") size 20 bold True color "#cc0066"
+                text kag_tr("おジャ魔女あどべんちゃ～「ないしょのまほう」") size 16 bold True color "#222222"
+                text (kag_tr("Ren'Py 移植版") + "  Ver " + config.version) size 14 color "#555555"
+                textbutton kag_tr("閉じる"):
+                    xalign 1.0
+                    background "#ff0099"
+                    hover_background "#ff33aa"
+                    padding (16, 6)
+                    text_color "#ffffff"
+                    action Hide("kag_about_dialog")
 
 init python:
     class _KAGKeyCaptureDisplayable(renpy.Displayable):
@@ -2200,83 +2206,85 @@ screen kag_shortcuts_dialog():
     zorder 145
     on "hide" action [SetVariable("_kag_capturing_shortcut", None), Function(kag_on_overlay_screen_hide, "kag_shortcuts_dialog")]
     key "K_ESCAPE" action If(_kag_capturing_shortcut, true=SetVariable("_kag_capturing_shortcut", None), false=[SetVariable("_kag_capturing_shortcut", None), Hide("kag_shortcuts_dialog")])
-    add Solid("#00000088", xysize=(800, 600))
-    frame align (0.5, 0.5) xsize 660 ysize 510 padding (20, 16) background "#fff5faf8":
-        vbox spacing 10:
-            text kag_tr("ショートカット設定") size 20 bold True color "#cc0066"
-            if _kag_capturing_shortcut:
-                text kag_tr("新しいキーを押してください... (Escでキャンセル)") size 14 bold True color "#cc0066"
-            else:
-                text kag_tr("各機能のショートカットキーを変更・解除できます。") size 13 color "#555555"
+    fixed xysize (800, 600):
+        add Solid("#00000088", xysize=(800, 600))
+        frame align (0.5, 0.5) xsize 660 ysize 510 padding (20, 16) background "#fff5faf8":
+            vbox spacing 10:
+                text kag_tr("ショートカット設定") size 20 bold True color "#cc0066"
+                if _kag_capturing_shortcut:
+                    text kag_tr("新しいキーを押してください... (Escでキャンセル)") size 14 bold True color "#cc0066"
+                else:
+                    text kag_tr("各機能のショートカットキーを変更・解除できます。") size 13 color "#555555"
 
-            $ _cur_shortcuts = kag_get_shortcuts()
-            viewport xsize 620 ysize 360 scrollbars "vertical" mousewheel True draggable True:
-                vbox spacing 4:
-                    for _row_i, (_sc_id, _sc_label, _sc_default) in enumerate(KAG_SHORTCUT_SPEC):
-                        $ _cur_key = _cur_shortcuts.get(_sc_id)
-                        $ _is_cap = (_kag_capturing_shortcut == _sc_id)
-                        frame xsize 596 ysize 34 padding (10, 4) background ("#ffe0f0" if _is_cap else ("#ffffffdd" if _row_i % 2 == 0 else "#fff0f7dd")):
-                            text kag_tr(_sc_label) xalign 0.0 yalign 0.5 size 14 color "#222222"
-                            hbox xalign 1.0 yalign 0.5 spacing 6:
-                                frame xsize 128 ysize 26 padding (6, 2) background ("#ff009922" if _is_cap else "#f3e8f0"):
-                                    text (kag_tr("入力待ち...") if _is_cap else kag_format_shortcut_key(_cur_key)) align (0.5, 0.5) size 13 bold True color ("#cc0066" if _is_cap else ("#222222" if _cur_key else "#888888"))
-                                textbutton (kag_tr("中止") if _is_cap else kag_tr("変更")):
-                                    xsize 68
-                                    ysize 26
-                                    padding (4, 2)
-                                    background ("#aa4477" if _is_cap else "#ff0099")
-                                    hover_background ("#cc5599" if _is_cap else "#ff33aa")
-                                    text_size 13
-                                    text_color "#ffffff"
-                                    text_align (0.5, 0.5)
-                                    action SetVariable("_kag_capturing_shortcut", None if _is_cap else _sc_id)
-                                textbutton kag_tr("解除"):
-                                    xsize 68
-                                    ysize 26
-                                    padding (4, 2)
-                                    background "#777777"
-                                    hover_background "#555555"
-                                    insensitive_background "#cccccc"
-                                    text_size 13
-                                    text_color "#ffffff"
-                                    text_align (0.5, 0.5)
-                                    sensitive (_cur_key is not None)
-                                    action [SetVariable("_kag_capturing_shortcut", None), Function(kag_clear_shortcut, _sc_id)]
+                $ _cur_shortcuts = kag_get_shortcuts()
+                viewport xsize 620 ysize 360 scrollbars "vertical" mousewheel True draggable True:
+                    vbox spacing 4:
+                        for _row_i, (_sc_id, _sc_label, _sc_default) in enumerate(KAG_SHORTCUT_SPEC):
+                            $ _cur_key = _cur_shortcuts.get(_sc_id)
+                            $ _is_cap = (_kag_capturing_shortcut == _sc_id)
+                            frame xsize 596 ysize 34 padding (10, 4) background ("#ffe0f0" if _is_cap else ("#ffffffdd" if _row_i % 2 == 0 else "#fff0f7dd")):
+                                text kag_tr(_sc_label) xalign 0.0 yalign 0.5 size 14 color "#222222"
+                                hbox xalign 1.0 yalign 0.5 spacing 6:
+                                    frame xsize 128 ysize 26 padding (6, 2) background ("#ff009922" if _is_cap else "#f3e8f0"):
+                                        text (kag_tr("入力待ち...") if _is_cap else kag_format_shortcut_key(_cur_key)) align (0.5, 0.5) size 13 bold True color ("#cc0066" if _is_cap else ("#222222" if _cur_key else "#888888"))
+                                    textbutton (kag_tr("中止") if _is_cap else kag_tr("変更")):
+                                        xsize 68
+                                        ysize 26
+                                        padding (4, 2)
+                                        background ("#aa4477" if _is_cap else "#ff0099")
+                                        hover_background ("#cc5599" if _is_cap else "#ff33aa")
+                                        text_size 13
+                                        text_color "#ffffff"
+                                        text_align (0.5, 0.5)
+                                        action SetVariable("_kag_capturing_shortcut", None if _is_cap else _sc_id)
+                                    textbutton kag_tr("解除"):
+                                        xsize 68
+                                        ysize 26
+                                        padding (4, 2)
+                                        background "#777777"
+                                        hover_background "#555555"
+                                        insensitive_background "#cccccc"
+                                        text_size 13
+                                        text_color "#ffffff"
+                                        text_align (0.5, 0.5)
+                                        sensitive (_cur_key is not None)
+                                        action [SetVariable("_kag_capturing_shortcut", None), Function(kag_clear_shortcut, _sc_id)]
 
-            hbox xfill True:
-                textbutton kag_tr("初期設定に戻す"):
-                    xalign 0.0
-                    background "#888888"
-                    hover_background "#666666"
-                    padding (14, 6)
-                    text_size 14
-                    text_color "#ffffff"
-                    action Function(kag_reset_shortcuts)
-                textbutton kag_tr("閉じる"):
-                    xalign 1.0
-                    background "#ff0099"
-                    hover_background "#ff33aa"
-                    padding (18, 6)
-                    text_size 14
-                    text_color "#ffffff"
-                    action [SetVariable("_kag_capturing_shortcut", None), Hide("kag_shortcuts_dialog")]
-    add _kag_key_capture_disp
+                hbox xfill True:
+                    textbutton kag_tr("初期設定に戻す"):
+                        xalign 0.0
+                        background "#888888"
+                        hover_background "#666666"
+                        padding (14, 6)
+                        text_size 14
+                        text_color "#ffffff"
+                        action Function(kag_reset_shortcuts)
+                    textbutton kag_tr("閉じる"):
+                        xalign 1.0
+                        background "#ff0099"
+                        hover_background "#ff33aa"
+                        padding (18, 6)
+                        text_size 14
+                        text_color "#ffffff"
+                        action [SetVariable("_kag_capturing_shortcut", None), Hide("kag_shortcuts_dialog")]
+        add _kag_key_capture_disp
 
 # Standard Confirm & Notify screens styled cleanly at 800x600
 screen confirm(message, yes_action, no_action):
     modal True
     zorder 200
     on "hide" action Function(kag_on_overlay_screen_hide, "confirm")
-    add Solid("#00000088", xysize=(800, 600))
-    frame align (0.5, 0.5) xsize 440 padding (24, 20) background "#fff5faf8":
-        vbox spacing 16 xalign 0.5:
-            text _(message) text_align 0.5 size 16 color "#222222" xalign 0.5
-            hbox spacing 24 xalign 0.5:
-                textbutton kag_tr("はい") background "#ff0099" hover_background "#ff33aa" padding (20, 6) text_color "#ffffff" action yes_action
-                textbutton kag_tr("いいえ") background "#888888" hover_background "#666666" padding (20, 6) text_color "#ffffff" action no_action
+    fixed xysize (800, 600):
+        add Solid("#00000088", xysize=(800, 600))
+        frame align (0.5, 0.5) xsize 440 padding (24, 20) background "#fff5faf8":
+            vbox spacing 16 xalign 0.5:
+                text _(message) text_align 0.5 size 16 color "#222222" xalign 0.5
+                hbox spacing 24 xalign 0.5:
+                    textbutton kag_tr("はい") background "#ff0099" hover_background "#ff33aa" padding (20, 6) text_color "#ffffff" action yes_action
+                    textbutton kag_tr("いいえ") background "#888888" hover_background "#666666" padding (20, 6) text_color "#ffffff" action no_action
 
 screen notify(message):
     zorder 250
-    frame xpos 20 ypos 32 padding (12, 6) background "#ff0099dd":
-        text message size 14 color "#ffffff"
+    frame xpos 20 ypos (12 if kag_is_android_ui() else 32) padding (12, 6) background "#ff0099dd":
+        text message size (16 if kag_is_android_ui() else 14) color "#ffffff"
     timer 2.5 action Hide("notify")

@@ -763,3 +763,64 @@ translate zh_cn strings:
 
     old "ショートカットを初期設定に戻しました。"
     new "已恢复默认快捷键设置。"
+
+    # Android Portrait / Landscape Controls & Mobile Settings Menu
+    old "スキップ中..."
+    new "快进中..."
+
+    old "オート再生中..."
+    new "自动播放中..."
+
+    old "上の画面のボタンや選択肢をタップしてください"
+    new "请点击上方画面中的按钮或选项"
+
+    old "ここ、または画面をタップして次へ"
+    new "轻触此处或画面继续"
+
+    old "履歴"
+    new "历史"
+
+    old "スキップ"
+    new "快进"
+
+    old "オート"
+    new "自动"
+
+    old "非表示"
+    new "隐藏"
+
+    old "セーブ"
+    new "存档"
+
+    old "ロード"
+    new "读档"
+
+    old "横画面"
+    new "横屏"
+
+    old "縦画面"
+    new "竖屏"
+
+    old "メニュー"
+    new "菜单"
+
+    old "メニュー・設定"
+    new "菜单与设置"
+
+    old "画面の向き"
+    new "屏幕方向"
+
+    old "縦画面 (デフォルト)"
+    new "竖屏 (默认)"
+
+    old "等幅ゴシック"
+    new "等宽黑体"
+
+    old "プロポーショナル"
+    new "比例黑体"
+
+    old "再生する (ON)"
+    new "播放 (开启)"
+
+    old "スキップ (OFF)"
+    new "跳过 (关闭)"

@@ -12,6 +12,16 @@
 | **实机对话** | **特典 CG 相册** |
 | ![实机对话](docs/screenshots/03_dialogue_zh.png) | ![特典 CG 相册](docs/screenshots/04_cg_gallery_zh.png) |
 
+### 手机端运行效果（默认竖屏 · 支持横竖屏切换）
+
+| 竖屏标题界面 | 竖屏实机对话（底部操作栏） | 竖屏触控设置菜单 |
+| :---: | :---: | :---: |
+| <img src="docs/screenshots/05_android_portrait_title.png" width="220" alt="安卓竖屏标题界面"> | <img src="docs/screenshots/06_android_portrait_game.png" width="220" alt="安卓竖屏实机对话"> | <img src="docs/screenshots/07_android_portrait_menu.png" width="220" alt="安卓竖屏设置菜单"> |
+
+| 横屏实机对话（底部 8 键操作栏） |
+| :---: |
+| <img src="docs/screenshots/08_android_landscape_game.png" width="540" alt="安卓横屏实机对话"> |
+
 ## 下载即玩
 
 前往 **[Releases](https://github.com/dibin666/NaishoNoMahou-renpy/releases)** 下载对应安装包，无需安装 Python 或 Ren'Py：
@@ -25,7 +35,7 @@
   ./NaishoNoMahou-1.0.0-linux/NaishoNoMahou-arm64  # ARM64 (aarch64)
   ```
 - **macOS (`Universal`: Apple Silicon `arm64` + Intel `x86_64`)**：下载 `NaishoNoMahou-1.0.0-mac.zip`，解压获得 `NaishoNoMahou.app`（未签名应用首次运行如提示已损坏，可执行 `xattr -cr NaishoNoMahou.app` 或右键「打开」）
-- **Android (`arm64-v8a` / `armeabi-v7a` / `x86_64`)**：下载 `NaishoNoMahou-1.0.0-android.apk`，直接安装即可游玩
+- **Android (`arm64-v8a` / `armeabi-v7a` / `x86_64`)**：下载 `NaishoNoMahou-1.0.0-android.apk`，直接安装即可游玩（默认竖屏，底部配备操作按钮栏，支持一键切换横屏/竖屏）
 - **Web (`WebAssembly / HTML5`)**：下载 `NaishoNoMahou-1.0.0-web.zip`，解压至任意静态 HTTP 服务器即可在现代浏览器运行（支持资源按需渐进加载与浏览器存档导入/导出）：
   ```bash
   unzip NaishoNoMahou-1.0.0-web.zip -d naisho-web && python3 -m http.server -d naisho-web 8080
@@ -39,6 +49,7 @@
 - **多平台开箱即玩**：提供 Windows、Linux（x86_64 & ARM64）、macOS（Apple Silicon & Intel Universal）、Android APK 与 Web（WASM）完整分发包
 - **双语实时切换**：菜单、剧本、UI 按钮与游戏 Logo 支持日语 / 简体中文即时切换
 - **字体模式切换**：内置等幅（原作排版比例）与比例字体切换
+- **移动端深度适配**：Android 版默认竖屏单手操作，上方完整呈现 `4:3` 原画舞台，底部提供历史 / 快进 / 自动 / 隐藏 / 存档 / 读档 / 横竖屏切换 / 菜单按钮栏，并支持一键切换横屏游玩
 - **系统与特典完整**：支持 30 格存档/锁定、右键/顶栏菜单、序章点击推进及全特典（CG 相册 / 剧情回忆）
 
 ## 从源码构建（可选）

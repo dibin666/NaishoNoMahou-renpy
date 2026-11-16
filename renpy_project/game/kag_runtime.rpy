@@ -432,9 +432,8 @@ init -1 python:
                 renpy.with_statement(None)
             return
         disp = kag_make_displayable(storage, sepia=sepia)
-        if left != 0 or top != 0:
-            disp = Transform(disp, xpos=int(left), ypos=int(top))
-        renpy.show(tag, what=disp, layer="master", zorder=z)
+        pos_tr = Position(xpos=int(left), ypos=int(top), xanchor=0, yanchor=0)
+        renpy.show(tag, what=disp, at_list=[pos_tr], layer="master", zorder=z)
         if page == "fore":
             renpy.with_statement(None)
 
@@ -453,7 +452,7 @@ init -1 python:
             config.skipping = None
         sepia = (ctype == "sepia")
         disp = kag_make_displayable(storage, sepia=sepia)
-        renpy.show("kag_bg", what=disp, layer="master", zorder=0)
+        renpy.show("kag_bg", what=disp, at_list=[Position(xpos=0, ypos=0, xanchor=0, yanchor=0)], layer="master", zorder=0)
         rule_map = {
             "left": "trans01",
             "right": "trans02",
@@ -471,19 +470,19 @@ init -1 python:
     def kag_drawchar(storage, time_ms=300, sepia=False, canskip=True):
         store.kag_mesframe_visible = True
         disp = kag_make_displayable(storage, sepia=sepia)
-        renpy.show("kag_fg_0", what=disp, layer="master", zorder=10)
+        renpy.show("kag_fg_0", what=disp, at_list=[Position(xpos=0, ypos=0, xanchor=0, yanchor=0)], layer="master", zorder=10)
         tr = Dissolve(max(0.01, time_ms / 1000.0)) if time_ms > 0 else None
         renpy.with_statement(tr)
 
     def kag_bgdraw():
         disp = kag_make_displayable("bg017_a")
-        renpy.show("kag_fg_1", what=disp, layer="master", zorder=20)
+        renpy.show("kag_fg_1", what=disp, at_list=[Position(xpos=0, ypos=0, xanchor=0, yanchor=0)], layer="master", zorder=20)
         tr = kag_make_transition(500, rule="trans01")
         renpy.with_statement(tr)
 
     def kag_frmdraw():
         disp = kag_make_displayable("c_frm")
-        renpy.show("kag_fg_1", what=disp, layer="master", zorder=20)
+        renpy.show("kag_fg_1", what=disp, at_list=[Position(xpos=0, ypos=0, xanchor=0, yanchor=0)], layer="master", zorder=20)
         renpy.with_statement(Dissolve(0.6))
 
     def kag_wt(canskip=True):
@@ -787,7 +786,31 @@ init -1 python:
         if not kag_can_capture_gameplay_screenshot():
             return getattr(iface, "_kag_saved_screenshot", None) is not None
         if force or getattr(iface, "_kag_saved_screenshot", None) is None:
-            renpy.take_screenshot((config.thumbnail_width, config.thumbnail_height))
+            captured_ok = False
+            if "kag_is_android_ui" in globals() and kag_is_android_ui() and getattr(iface, "surftree", None) is not None and renpy.display.draw is not None:
+                try:
+                    import io as _io
+                    full_surf = renpy.display.draw.screenshot(iface.surftree)
+                    fw, fh = full_surf.get_size()
+                    vw = max(1, int(config.screen_width))
+                    vh = max(1, int(config.screen_height))
+                    sx, sy = getattr(store, "_kag_android_stage_pos", (0, 0))
+                    rx = max(0, min(fw - 1, int(round(float(sx) * fw / vw))))
+                    ry = max(0, min(fh - 1, int(round(float(sy) * fh / vh))))
+                    rw = max(1, min(fw - rx, int(round(800.0 * fw / vw))))
+                    rh = max(1, min(fh - ry, int(round(600.0 * fh / vh))))
+                    sub = full_surf.subsurface((rx, ry, rw, rh))
+                    thumb = renpy.display.scale.smoothscale(sub, (config.thumbnail_width, config.thumbnail_height))
+                    renpy.display.render.mutated_surface(thumb)
+                    with _io.BytesIO() as _sio:
+                        renpy.display.module.save_png(thumb, _sio, 0)
+                        iface.screenshot = _sio.getvalue()
+                    iface.screenshot_surface = thumb
+                    captured_ok = True
+                except Exception:
+                    captured_ok = False
+            if not captured_ok:
+                renpy.take_screenshot((config.thumbnail_width, config.thumbnail_height))
             shot = getattr(iface, "screenshot", None)
             if shot is not None:
                 iface._kag_saved_screenshot = shot
@@ -982,7 +1005,7 @@ init -1 python:
         store.kag_mesframe_fade = False
         store._kag_active_dropdown = None
         store._kag_capturing_shortcut = None
-        for scr in ("kag_menubar", "kag_save_load", "kag_rclick_menu", "kag_comment_editor", "kag_about_dialog", "kag_shortcuts_dialog"):
+        for scr in ("kag_menubar", "kag_save_load", "kag_rclick_menu", "kag_comment_editor", "kag_about_dialog", "kag_shortcuts_dialog", "kag_android_menu"):
             if renpy.get_screen(scr):
                 renpy.hide_screen(scr)
         renpy.hide("kag_fg_0", layer="master")
@@ -1032,6 +1055,7 @@ init -1 python:
             "kag_input_dialog",
             "kag_about_dialog",
             "kag_shortcuts_dialog",
+            "kag_android_menu",
             "history",
             "confirm",
         ):

@@ -354,6 +354,42 @@
       object-fit: cover;
     }
 
+    .mobile-shots-sub {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 2px dashed var(--colL);
+    }
+
+    .mobile-shots-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--colB);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .mobile-portrait-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .shot-item.portrait img {
+      aspect-ratio: 1 / 2;
+      object-fit: contain;
+      background: #1a0918;
+    }
+
+    .mobile-landscape-wrap {
+      margin-top: 10px;
+    }
+
+    .shot-item.landscape-wide img {
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+      background: #1a0918;
+    }
+
     .shot-cap {
       padding: 5px 8px;
       background: var(--colL);
@@ -526,6 +562,9 @@
       .shot-grid {
         grid-template-columns: 1fr;
       }
+      .mobile-portrait-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
       .lb-prev { left: 8px; }
       .lb-next { right: 8px; }
     }
@@ -636,6 +675,30 @@
             <div class="shot-cap">特典 CG 相册</div>
           </div>
         </div>
+
+        <div class="mobile-shots-sub">
+          <div class="mobile-shots-title">Android 手机端运行效果（默认竖屏 · 支持横竖屏切换）</div>
+          <div class="mobile-portrait-grid">
+            <div class="shot-item portrait" data-index="4">
+              <img src="screenshots/05_android_portrait_title.png" alt="安卓竖屏标题界面" loading="lazy">
+              <div class="shot-cap">竖屏标题界面</div>
+            </div>
+            <div class="shot-item portrait" data-index="5">
+              <img src="screenshots/06_android_portrait_game.png" alt="安卓竖屏实机对话" loading="lazy">
+              <div class="shot-cap">竖屏实机与底部栏</div>
+            </div>
+            <div class="shot-item portrait" data-index="6">
+              <img src="screenshots/07_android_portrait_menu.png" alt="安卓竖屏设置菜单" loading="lazy">
+              <div class="shot-cap">竖屏触控设置菜单</div>
+            </div>
+          </div>
+          <div class="mobile-landscape-wrap">
+            <div class="shot-item landscape-wide" data-index="7">
+              <img src="screenshots/08_android_landscape_game.png" alt="安卓横屏实机对话" loading="lazy">
+              <div class="shot-cap">横屏实机画面与底部 8 键操作栏</div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="panel" id="download">
@@ -676,7 +739,7 @@
           <tr>
             <th>Android</th>
             <td>
-              下载 <a href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-android.apk" style="color:var(--colB);font-weight:700;text-decoration:underline;">NaishoNoMahou-1.0.0-android.apk</a>（约 733 MiB，含 <code>arm64-v8a</code> / <code>armeabi-v7a</code> / <code>x86_64</code>），直接安装即可。
+              下载 <a href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-android.apk" style="color:var(--colB);font-weight:700;text-decoration:underline;">NaishoNoMahou-1.0.0-android.apk</a>（约 733 MiB，含 <code>arm64-v8a</code> / <code>armeabi-v7a</code> / <code>x86_64</code>），直接安装即可。默认竖屏单手操作，底部集成常用操作栏并支持一键切换横屏/竖屏。
             </td>
           </tr>
           <tr>
@@ -722,7 +785,11 @@
         { src: "screenshots/01_title_zh.png", caption: "标题界面" },
         { src: "screenshots/02_prologue_logo_zh.png", caption: "序章中文 Logo" },
         { src: "screenshots/03_dialogue_zh.png", caption: "实机对话" },
-        { src: "screenshots/04_cg_gallery_zh.png", caption: "特典 CG 相册" }
+        { src: "screenshots/04_cg_gallery_zh.png", caption: "特典 CG 相册" },
+        { src: "screenshots/05_android_portrait_title.png", caption: "Android 竖屏标题界面" },
+        { src: "screenshots/06_android_portrait_game.png", caption: "Android 竖屏实机与底部操作栏" },
+        { src: "screenshots/07_android_portrait_menu.png", caption: "Android 竖屏触控设置菜单" },
+        { src: "screenshots/08_android_landscape_game.png", caption: "Android 横屏实机与底部 8 键操作栏" }
       ];
       let idx = 0;
       const lb = document.getElementById("lightbox");
