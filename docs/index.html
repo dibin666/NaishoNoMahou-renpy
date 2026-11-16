@@ -3,846 +3,171 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>小魔女DoReMi冒险 ～「秘密的魔法」～ | おジャ魔女あどべんちゃ～「ないしょのまほう」</title>
-  <meta name="description" content="おジャ魔女あどべんちゃ～「ないしょのまほう」/ 小魔女DoReMi冒险 ～「秘密的魔法」～ Ren'Py 8 跨平台移植版">
+  <title>小魔女DoReMi 官方网站（中文镜像） · おジャ魔女あどべんちゃ～「ないしょのまほう」</title>
   <link rel="icon" type="image/png" href="favicon.png">
-  <style>
-    /* Colors synced to https://www.toei-anim.co.jp/tv/doremi/ */
-    :root {
-      --colF: #FF81A8;
-      --colL: #FFE2E2;
-      --colB: #B70472;
-      --colA: #FFB2CA;
-      --pink-bar-top: #FF78AE;
-      --pink-bar-mid: #FF3E8C;
-      --pink-bar-bot: #E92574;
-      --text: #242424;
-      --muted: #66525B;
-      --star-yellow: #FFF176;
-      --star-blue: #19C2FF;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
-      color: var(--text);
-      font-size: 13px;
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      /* Recreates classic 20x20 warm peach gingham background tile (back.jpg) */
-      background-color: #FCF0E9;
-      background-image:
-        linear-gradient(90deg, rgba(244, 212, 198, 0.36) 50%, transparent 50%),
-        linear-gradient(rgba(244, 212, 198, 0.36) 50%, transparent 50%);
-      background-size: 12px 12px;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* Classic centered 820px Toei Portal Frame */
-    .portal-wrap {
-      width: min(840px, calc(100% - 20px));
-      margin: 14px auto 24px;
-      flex: 1;
-      display: grid;
-      grid-template-columns: 168px minmax(0, 1fr);
-      gap: 16px;
-      align-items: start;
-    }
-
-    /* Left Sidebar Navigation (inspired by menu01..05.gif capsules) */
-    .sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      position: sticky;
-      top: 14px;
-    }
-
-    .logo-tile {
-      background: #FFFFFF;
-      border: 3px solid var(--colF);
-      border-radius: 14px;
-      padding: 10px 8px;
-      text-align: center;
-      box-shadow: 0 3px 0 rgba(183, 4, 114, 0.16);
-    }
-
-    .logo-tile img {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      display: block;
-      margin: 0 auto 6px;
-    }
-
-    .logo-tile .s-jp {
-      display: block;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--colB);
-      line-height: 1.3;
-    }
-
-    .logo-tile .s-cn {
-      display: block;
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--text);
-      margin-top: 2px;
-    }
-
-    .menu-btn {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      height: 52px;
-      padding: 0 12px;
-      border-radius: 999px;
-      border: 3px solid var(--colF);
-      background: linear-gradient(180deg, #FFFFFF 0%, #FFEAF2 55%, #FFD1E4 100%);
-      color: var(--colB);
-      font-weight: 800;
-      font-size: 14px;
-      letter-spacing: 0.04em;
-      box-shadow: 0 3px 0 #F5A3C1;
-      transition: transform 0.12s ease, background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
-    }
-
-    .menu-btn::before,
-    .menu-btn::after {
-      content: "★";
-      font-size: 11px;
-      color: #FFD43B;
-      text-shadow: 0 0 1px var(--colB), 1px 1px 0 var(--colF);
-    }
-
-    .menu-btn:hover,
-    .menu-btn.active {
-      background: linear-gradient(180deg, #FF99BE 0%, #FF5C9D 55%, #E62C79 100%);
-      border-color: #FFFFFF;
-      color: #FFFFFF;
-      box-shadow: 0 3px 0 var(--colB), 0 0 0 2px var(--colF);
-      transform: translateY(-1px);
-    }
-
-    .menu-btn:hover::before,
-    .menu-btn:hover::after,
-    .menu-btn.active::before,
-    .menu-btn.active::after {
-      color: var(--star-yellow);
-      text-shadow: none;
-    }
-
-    .side-meta {
-      background: #FFFFFF;
-      border: 2px solid var(--colA);
-      border-radius: 12px;
-      padding: 10px;
-      font-size: 11px;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .side-meta div {
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px dashed var(--colL);
-      padding: 3px 0;
-    }
-
-    .side-meta div:last-child {
-      border-bottom: none;
-    }
-
-    .side-meta strong {
-      color: var(--colB);
-    }
-
-    /* Right White Content Area */
-    .main-col {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      min-width: 0;
-    }
-
-    .panel {
-      background: #FFFFFF;
-      border: 2px solid var(--colA);
-      border-radius: 16px;
-      padding: 14px 16px 16px;
-      box-shadow: 0 4px 12px rgba(183, 4, 114, 0.06);
-    }
-
-    /* Glossy Star Capsule Header (inspired by arasuji_title.gif) */
-    .star-bar {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 6px 46px;
-      margin-bottom: 14px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, #FF93BF 0%, #FF4794 46%, #EE2678 100%);
-      border: 2px solid #FF2E85;
-      box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.55), 0 3px 0 rgba(255, 129, 168, 0.35);
-      color: #FFFFFF;
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      text-shadow: 0 1px 2px rgba(145, 0, 74, 0.45);
-    }
-
-    .star-bar .stars-left,
-    .star-bar .stars-right {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      align-items: center;
-      pointer-events: none;
-    }
-
-    .star-bar .stars-left { left: 8px; }
-    .star-bar .stars-right { right: 8px; }
-
-    /* Hero Main Visual */
-    .hero-head {
-      text-align: center;
-      margin-bottom: 12px;
-    }
-
-    .hero-head h1 {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--colB);
-      line-height: 1.3;
-    }
-
-    .hero-head .jp-name {
-      font-size: 13px;
-      font-weight: 700;
-      color: #E0387E;
-      margin-top: 2px;
-    }
-
-    .hero-stage {
-      border: 3px solid var(--colF);
-      border-radius: 10px;
-      overflow: hidden;
-      background: var(--colL);
-      cursor: zoom-in;
-    }
-
-    .hero-stage img {
-      display: block;
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-    }
-
-    .quick-dl {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .dl-pill {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 9px 10px;
-      border-radius: 999px;
-      font-weight: 800;
-      font-size: 12px;
-      text-align: center;
-      border: 2px solid var(--colF);
-      transition: transform 0.12s ease, filter 0.12s ease;
-    }
-
-    .dl-pill:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.03);
-    }
-
-    .dl-win {
-      background: linear-gradient(180deg, #FF7CB2 0%, #EE2E7F 100%);
-      color: #FFFFFF;
-      border-color: var(--colB);
-    }
-
-    .dl-lin,
-    .dl-alt {
-      background: var(--colL);
-      color: var(--colB);
-    }
-
-    /* Info Table (authentic .colL / .colA Toei table feel) */
-    table.spec {
-      width: 100%;
-      table-layout: fixed;
-      border-collapse: collapse;
-      margin-top: 12px;
-      font-size: 12px;
-    }
-
-    table.spec th,
-    table.spec td {
-      border: 1px solid var(--colA);
-      padding: 6px 10px;
-      text-align: left;
-      overflow-wrap: anywhere;
-    }
-
-    table.spec th {
-      width: 84px;
-      background: var(--colL);
-      color: var(--colB);
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    table.spec td {
-      background: #FFFFFF;
-    }
-
-    /* Screenshots 2x2 */
-    .shot-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .shot-item {
-      border: 2px solid var(--colA);
-      border-radius: 10px;
-      overflow: hidden;
-      background: #FFF8FB;
-      cursor: zoom-in;
-      transition: border-color 0.14s ease, transform 0.14s ease;
-    }
-
-    .shot-item:hover {
-      border-color: var(--colF);
-      transform: translateY(-2px);
-    }
-
-    .shot-item img {
-      display: block;
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-    }
-
-    .mobile-shots-sub {
-      margin-top: 16px;
-      padding-top: 12px;
-      border-top: 2px dashed var(--colL);
-    }
-
-    .mobile-shots-title {
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--colB);
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    .mobile-portrait-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-
-    .shot-item.portrait img {
-      aspect-ratio: 1 / 2;
-      object-fit: contain;
-      background: #1a0918;
-    }
-
-    .mobile-landscape-wrap {
-      margin-top: 10px;
-    }
-
-    .shot-item.landscape-wide img {
-      aspect-ratio: 16 / 9;
-      object-fit: contain;
-      background: #1a0918;
-    }
-
-    .shot-cap {
-      padding: 5px 8px;
-      background: var(--colL);
-      color: var(--colB);
-      font-size: 12px;
-      font-weight: 700;
-      text-align: center;
-      border-top: 1px solid var(--colA);
-    }
-
-    /* Download & Run Box */
-    .run-cmd {
-      margin-top: 8px;
-      background: #FFF6FA;
-      border: 1px solid var(--colA);
-      border-radius: 8px;
-      padding: 7px 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 11.5px;
-      color: var(--text);
-      max-width: 100%;
-      overflow-x: auto;
-    }
-
-    .run-cmd code {
-      min-width: 0;
-      word-break: break-all;
-    }
-
-    .copy-btn {
-      flex-shrink: 0;
-      border: 1px solid var(--colF);
-      background: var(--colL);
-      color: var(--colB);
-      border-radius: 6px;
-      padding: 3px 9px;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .copy-btn:hover {
-      background: var(--colF);
-      color: #FFFFFF;
-    }
-
-    /* Classic Full-Width #FF81A8 Footer Bar */
-    .toei-footer {
-      background-color: var(--colF);
-      color: #FFFFFF;
-      text-align: center;
-      padding: 7px 12px;
-      font-size: 11px;
-      line-height: 1.5;
-    }
-
-    .toei-footer a {
-      color: #FFFFFF;
-      text-decoration: underline;
-    }
-
-    /* Lightbox */
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      z-index: 200;
-      background: rgba(34, 8, 22, 0.84);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .lightbox.open {
-      display: flex;
-    }
-
-    .lb-box {
-      position: relative;
-      max-width: min(860px, 100%);
-      background: #FFFFFF;
-      border: 4px solid var(--colF);
-      border-radius: 14px;
-      padding: 10px;
-      text-align: center;
-    }
-
-    .lb-box img {
-      max-width: 100%;
-      max-height: 78vh;
-      display: block;
-      border-radius: 8px;
-    }
-
-    .lb-caption {
-      margin-top: 8px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--colB);
-    }
-
-    .lb-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 2px solid #FFFFFF;
-      background: var(--colF);
-      color: #FFFFFF;
-      font-size: 18px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .lb-prev { left: -18px; }
-    .lb-next { right: -18px; }
-
-    .lb-close {
-      position: absolute;
-      top: -14px;
-      right: -14px;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 2px solid #FFFFFF;
-      background: var(--colB);
-      color: #FFFFFF;
-      font-size: 16px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    @media (max-width: 720px) {
-      .portal-wrap {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 12px;
-      }
-      .sidebar {
-        position: static;
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 8px;
-      }
-      .logo-tile,
-      .side-meta {
-        grid-column: 1 / -1;
-      }
-      .menu-btn {
-        height: 42px;
-        font-size: 13px;
-      }
-      .star-bar {
-        font-size: 14px;
-        padding: 6px 40px;
-      }
-      .hero-head h1 {
-        font-size: 16px;
-      }
-      table.spec th {
-        width: 68px;
-        padding: 6px 8px;
-      }
-      .quick-dl,
-      .shot-grid {
-        grid-template-columns: 1fr;
-      }
-      .mobile-portrait-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .lb-prev { left: 8px; }
-      .lb-next { right: 8px; }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <script src="common.js"></script>
 </head>
-<body>
-  <div class="portal-wrap">
-    <aside class="sidebar">
-      <div class="logo-tile">
-        <img src="favicon.png" alt="NaishoNoMahou">
-        <span class="s-jp">おジャ魔女あどべんちゃ～<br>「ないしょのまほう」</span>
-        <span class="s-cn">小魔女DoReMi冒险</span>
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" background="img/back.jpg" data-title-zh="小魔女DoReMi 官方网站（中文镜像） · おジャ魔女あどべんちゃ～「ないしょのまほう」" data-title-jp="おジャ魔女どれみ 公式サイト · おジャ魔女あどべんちゃ～「ないしょのまほう」">
+<table class="toei-top-stripe" border="0" cellpadding="0" cellspacing="0" align="center">
+  <tr>
+    <td class="colF"><img src="img/spacer.gif" width="1" height="48" alt=""></td>
+    <td class="toei-top-nav" align="center">
+      <div class="toei-top-nav-inner">
+        <div class="toei-top-row-pink">
+          <span data-zh="★ 东映动画 · 小魔女DoReMi 官方中文门户" data-jp="★ 東映アニメーション · おジャ魔女どれみ 公式サイト">★ 东映动画 · 小魔女DoReMi 官方中文门户</span>
+          <span class="toei-top-right-tools">
+            <a href="game.html" data-zh="Ren'Py 8 移植版 v1.0.0" data-jp="Ren'Py 8 移植版 v1.0.0">Ren'Py 8 移植版 v1.0.0</a>
+            <a href="https://github.com/dibin666/NaishoNoMahou-renpy" target="_blank" rel="noopener">GitHub</a>
+            <span class="lang-switch" role="group" aria-label="Language Switch">
+              <button type="button" class="lang-btn active" data-set-lang="zh">简体中文</button>
+              <button type="button" class="lang-btn" data-set-lang="jp">日本語</button>
+            </span>
+          </span>
+        </div>
+        <div class="toei-top-row-light">
+          <a href="index.html" class="current" data-zh="作品首页" data-jp="トップページ">作品首页</a>
+          <a href="arasuji.html" data-zh="故事梗概" data-jp="あらすじ">故事梗概</a>
+          <a href="caracter.html" data-zh="人物介绍" data-jp="キャラクター紹介">人物介绍</a>
+          <a href="episode.html" data-zh="各集介绍" data-jp="各話紹介">各集介绍</a>
+          <a href="staff.html" data-zh="制作人员" data-jp="スタッフ">制作人员</a>
+          <a href="oped.html" data-zh="片头·片尾曲" data-jp="OP・ED">片头·片尾曲</a>
+          <a href="game.html" data-zh="游戏下载" data-jp="ゲームDL">游戏下载</a>
+          <a href="theater.html" data-zh="实机截图" data-jp="スクリーンショット">实机截图</a>
+        </div>
       </div>
+    </td>
+    <td class="colF"><img src="img/spacer.gif" width="1" height="48" alt=""></td>
+  </tr>
+</table>
+<div class="toei-scroll-wrap">
+  <table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+      <td background="img/back.gif" colspan="3" class="img-cell"><img src="img/back.gif" width="10" height="10" alt=""></td>
+    </tr>
+    <tr>
+      <td rowspan="2" background="img/back.jpg" valign="top" width="160" class="sidebar-cell">
+        <a href="arasuji.html"><img src="img/menu01_zh.png" data-zh="img/menu01_zh.png" data-jp="img/jp/menu01.gif" data-over-zh="img/menu01_over_zh.png" data-over-jp="img/jp/menu01_over.gif" width="150" height="74" alt="故事梗概" data-alt-zh="故事梗概" data-alt-jp="あらすじ"></a><br>
+        <img src="img/spacer.gif" width="1" height="1" alt=""><br>
+        <a href="caracter.html"><img src="img/menu02_zh.png" data-zh="img/menu02_zh.png" data-jp="img/jp/menu02.gif" data-over-zh="img/menu02_over_zh.png" data-over-jp="img/jp/menu02_over.gif" width="150" height="74" alt="人物介绍" data-alt-zh="人物介绍" data-alt-jp="キャラクター紹介"></a><br>
+        <img src="img/spacer.gif" width="1" height="1" alt=""><br>
+        <a href="episode.html"><img src="img/menu03_zh.png" data-zh="img/menu03_zh.png" data-jp="img/jp/menu03.gif" data-over-zh="img/menu03_over_zh.png" data-over-jp="img/jp/menu03_over.gif" width="150" height="74" alt="各集介绍" data-alt-zh="各集介绍" data-alt-jp="各話紹介"></a><br>
+        <img src="img/spacer.gif" width="1" height="1" alt=""><br>
+        <a href="staff.html"><img src="img/menu04_zh.png" data-zh="img/menu04_zh.png" data-jp="img/jp/menu04.gif" data-over-zh="img/menu04_over_zh.png" data-over-jp="img/jp/menu04_over.gif" width="150" height="74" alt="制作人员" data-alt-zh="制作人员" data-alt-jp="スタッフ"></a><br>
+        <img src="img/spacer.gif" width="1" height="1" alt=""><br>
+        <a href="oped.html"><img src="img/menu05_zh.png" data-zh="img/menu05_zh.png" data-jp="img/jp/menu05.gif" data-over-zh="img/menu05_over_zh.png" data-over-jp="img/jp/menu05_over.gif" width="150" height="74" alt="片头·片尾曲" data-alt-zh="片头·片尾曲" data-alt-jp="オープニング・エンディング"></a><br>
+      </td>
+      <td width="460" valign="top" class="img-cell"><img src="img/img_main01_zh.jpg" data-zh="img/img_main01_zh.jpg" data-jp="img/jp/img_main01.jpg" width="460" height="209" alt="小魔女DoReMi" data-alt-zh="小魔女DoReMi" data-alt-jp="おジャ魔女どれみ"></td>
+      <td width="140" valign="top" class="img-cell">
+        <a href="game.html"><img src="img/img_link_asonde_zh.jpg" data-zh="img/img_link_asonde_zh.jpg" data-jp="img/jp/img_link_asonde.jpg" data-over-zh="img/img_link_asonde2_zh.jpg" data-over-jp="img/jp/img_link_asonde2.jpg" width="140" height="102" alt="来玩DoReMi♪" data-alt-zh="来玩DoReMi♪" data-alt-jp="あそんでどれみ♪"></a><br>
+        <a href="theater.html"><img src="img/img_link_theater_zh.jpg" data-zh="img/img_link_theater_zh.jpg" data-jp="img/jp/img_link_theater.jpg" width="140" height="107" alt="小魔女剧场♪" data-alt-zh="小魔女剧场♪" data-alt-jp="おジャ魔女シアター♪"></a>
+      </td>
+    </tr>
+    <tr>
+      <td width="460" valign="top" class="img-cell"><img src="img/img_main02.jpg" width="460" height="182" alt="春风DoReMi、藤原羽月、妹尾爱子"></td>
+      <td rowspan="2" width="140" valign="top" class="img-cell">
+        <img src="img/img_link_hp_zh.jpg" data-zh="img/img_link_hp_zh.jpg" data-jp="img/jp/img_link_hp.jpg" width="140" height="53" alt="其他系列官网" data-alt-zh="其他系列官网" data-alt-jp="そのほかのシリーズHP"><br>
+        <a href="https://www.toei-anim.co.jp/tv/doremi_s/index.html" target="_blank" rel="noopener"><img src="img/img_link_hp1_zh.jpg" data-zh="img/img_link_hp1_zh.jpg" data-jp="img/jp/img_link_hp1.jpg" data-over-zh="img/img_link_hp1over_zh.jpg" data-over-jp="img/jp/img_link_hp1over.jpg" width="140" height="46" alt="小魔女DoReMi #"></a><br>
+        <a href="https://www.toei-anim.co.jp/tv/doremi_m/" target="_blank" rel="noopener"><img src="img/img_link_hp2_zh.jpg" data-zh="img/img_link_hp2_zh.jpg" data-jp="img/jp/img_link_hp2.jpg" data-over-zh="img/img_link_hp2over_zh.jpg" data-over-jp="img/jp/img_link_hp2over.jpg" width="140" height="73" alt="大集合！小魔女DoReMi"></a><br>
+        <a href="https://www.toei-anim.co.jp/tv/doremi_D/" target="_blank" rel="noopener"><img src="img/img_link_hp3_zh.jpg" data-zh="img/img_link_hp3_zh.jpg" data-jp="img/jp/img_link_hp3.jpg" data-over-zh="img/img_link_hp3over_zh.jpg" data-over-jp="img/jp/img_link_hp3over.jpg" width="140" height="53" alt="小魔女DoReMi DOKKA~N!"></a><br>
+        <a href="https://www.toei-anim.co.jp/tv/doremi_n/" target="_blank" rel="noopener"><img src="img/img_link_hp4_zh.jpg" data-zh="img/img_link_hp4_zh.jpg" data-jp="img/jp/img_link_hp4.jpg" data-over-zh="img/img_link_hp4over_zh.jpg" data-over-jp="img/jp/img_link_hp4over.jpg" width="140" height="43" alt="小魔女DoReMi 秘密篇"></a><br>
+        <img src="img/img_link_hp_.jpg" width="140" height="33" alt="">
+      </td>
+    </tr>
+    <tr>
+      <td width="160" valign="top" class="img-cell">
+        <a href="episode.html" data-title-zh="小魔女巴士之旅：查看全51话剧集" data-title-jp="おジャ魔女バスツアー：各話紹介へ" title="小魔女巴士之旅：查看全51话剧集"><img src="img/img_link_buss_zh.jpg" data-zh="img/img_link_buss_zh.jpg" data-jp="img/jp/img_link_buss.jpg" width="80" height="119" alt="小魔女巴士之旅"></a><a href="javascript:void(0)" onClick="openDoremiLightbox(0)" data-title-zh="老头阿迪的照相馆：查看游戏实机相册" data-title-jp="オヤジーデの写真館：ゲーム画面ギャラリー" title="老头阿迪的照相馆：查看游戏实机相册"><img src="img/img_link_oyaji_zh.jpg" data-zh="img/img_link_oyaji_zh.jpg" data-jp="img/jp/img_link_oyaji.jpg" data-over-zh="img/img_link_oyaji2_zh.jpg" data-over-jp="img/jp/img_link_oyaji2.jpg" width="80" height="119" alt="老头阿迪的照相馆"></a>
+      </td>
+      <td width="460" valign="top" class="img-cell"><img src="img/img_main03.jpg" width="460" height="119" alt=""></td>
+    </tr>
+    <tr>
+      <td background="img/back.jpg" colspan="3" class="img-cell"><img src="img/back.jpg" width="20" height="16" alt=""></td>
+    </tr>
+  </table>
 
-      <a class="menu-btn active" href="#top">作品首页</a>
-      <a class="menu-btn" href="#shots">游戏截图</a>
-      <a class="menu-btn" href="#download">下载游玩</a>
-      <a class="menu-btn" href="https://github.com/dibin666/NaishoNoMahou-renpy" target="_blank" rel="noopener">GitHub</a>
-
-      <div class="side-meta">
-        <div><span>版本</span><strong>v1.0.0</strong></div>
-        <div><span>引擎</span><strong>Ren'Py 8</strong></div>
-        <div><span>平台</span><strong>Win/Lin/Mac/And/Web</strong></div>
-        <div><span>语言</span><strong>日文 / 简中</strong></div>
-      </div>
-    </aside>
-
-    <main class="main-col">
-      <section class="panel" id="top">
-        <div class="star-bar">
-          <span class="stars-left" aria-hidden="true">
-            <svg width="34" height="28" viewBox="0 0 34 28"><polygon points="15,2 18,10 27,10 20,15 23,23 15,18 7,23 10,15 3,10 12,10" fill="#FFF176" stroke="#FF2E85" stroke-width="1.3"/><polygon points="27,13 28.5,17 33,17 29.5,19.5 31,24 27,21 23,24 24.5,19.5 21,17 25.5,17" fill="#19C2FF"/></svg>
-          </span>
-          小魔女DoReMi冒险 ～「秘密的魔法」～
-          <span class="stars-right" aria-hidden="true">
-            <svg width="34" height="28" viewBox="0 0 34 28"><polygon points="19,2 22,10 31,10 24,15 27,23 19,18 11,23 14,15 7,10 16,10" fill="#FFF176" stroke="#FF2E85" stroke-width="1.3"/><polygon points="7,13 8.5,17 13,17 9.5,19.5 11,24 7,21 3,24 4.5,19.5 1,17 5.5,17" fill="#19C2FF"/></svg>
-          </span>
-        </div>
-
-        <div class="hero-head">
-          <h1>おジャ魔女あどべんちゃ～「ないしょのまほう」</h1>
-          <div class="jp-name">Ren'Py 8 跨平台移植版 · 免安装点击即玩</div>
-        </div>
-
-        <div class="hero-stage" id="heroStage" title="点击放大">
-          <img src="screenshots/01_title_zh.png" alt="小魔女DoReMi冒险 标题画面">
-        </div>
-
-        <div class="quick-dl">
-          <a class="dl-pill dl-win" href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-win.zip">
-            Windows (.zip)
-          </a>
-          <a class="dl-pill dl-lin" href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-linux.tar.bz2">
-            Linux x64/ARM64
-          </a>
-          <a class="dl-pill dl-alt" href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-mac.zip">
-            macOS Universal
-          </a>
-          <a class="dl-pill dl-alt" href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-android.apk">
-            Android (.apk)
-          </a>
-          <a class="dl-pill dl-alt" href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-web.zip">
-            Web / WASM (.zip)
-          </a>
-          <a class="dl-pill dl-alt" href="#download">
-            运行说明 ↓
-          </a>
-        </div>
-
-        <table class="spec">
+  <table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+      <td colspan="3" height="4" bgcolor="#FF81A8" class="img-cell"><img src="img/spacer.gif" width="1" height="4" alt=""></td>
+    </tr>
+    <tr>
+      <td width="3" bgcolor="#FE509E" class="img-cell"><img src="img/spacer.gif" width="3" height="1" alt=""></td>
+      <td bgcolor="#FFFFFF" width="754" style="padding: 12px 16px;">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <th>语言支持</th>
-            <td>日语原版 / 简体中文 实时切换（含 UI、剧本、按钮及中文 Logo）</td>
-          </tr>
-          <tr>
-            <th>存档位置</th>
-            <td>Win / Linux 保存在游戏目录旁的 <code>game/saves/</code>；macOS 保存在 <code>~/Library/RenPy/NaishoNoMahou</code>；Android / Web 使用应用沙盒或浏览器 IndexedDB</td>
-          </tr>
-        </table>
-      </section>
-
-      <section class="panel" id="shots">
-        <div class="star-bar">
-          <span class="stars-left" aria-hidden="true">
-            <svg width="34" height="28" viewBox="0 0 34 28"><polygon points="15,2 18,10 27,10 20,15 23,23 15,18 7,23 10,15 3,10 12,10" fill="#FFF176" stroke="#FF2E85" stroke-width="1.3"/><polygon points="27,13 28.5,17 33,17 29.5,19.5 31,24 27,21 23,24 24.5,19.5 21,17 25.5,17" fill="#19C2FF"/></svg>
-          </span>
-          游戏截图
-          <span class="stars-right" aria-hidden="true">
-            <svg width="34" height="28" viewBox="0 0 34 28"><polygon points="19,2 22,10 31,10 24,15 27,23 19,18 11,23 14,15 7,10 16,10" fill="#FFF176" stroke="#FF2E85" stroke-width="1.3"/><polygon points="7,13 8.5,17 13,17 9.5,19.5 11,24 7,21 3,24 4.5,19.5 1,17 5.5,17" fill="#19C2FF"/></svg>
-          </span>
-        </div>
-
-        <div class="shot-grid">
-          <div class="shot-item" data-index="0">
-            <img src="screenshots/01_title_zh.png" alt="标题画面" loading="lazy">
-            <div class="shot-cap">标题界面</div>
-          </div>
-          <div class="shot-item" data-index="1">
-            <img src="screenshots/02_prologue_logo_zh.png" alt="序章中文 Logo" loading="lazy">
-            <div class="shot-cap">序章中文 Logo</div>
-          </div>
-          <div class="shot-item" data-index="2">
-            <img src="screenshots/03_dialogue_zh.png" alt="实机对话" loading="lazy">
-            <div class="shot-cap">实机对话</div>
-          </div>
-          <div class="shot-item" data-index="3">
-            <img src="screenshots/04_cg_gallery_zh.png" alt="CG 相册" loading="lazy">
-            <div class="shot-cap">特典 CG 相册</div>
-          </div>
-        </div>
-
-        <div class="mobile-shots-sub">
-          <div class="mobile-shots-title">Android 手机端运行效果（默认竖屏 · 支持横竖屏切换）</div>
-          <div class="mobile-portrait-grid">
-            <div class="shot-item portrait" data-index="4">
-              <img src="screenshots/05_android_portrait_title.png" alt="安卓竖屏标题界面" loading="lazy">
-              <div class="shot-cap">竖屏标题界面</div>
-            </div>
-            <div class="shot-item portrait" data-index="5">
-              <img src="screenshots/06_android_portrait_game.png" alt="安卓竖屏实机对话" loading="lazy">
-              <div class="shot-cap">竖屏实机与底部栏</div>
-            </div>
-            <div class="shot-item portrait" data-index="6">
-              <img src="screenshots/07_android_portrait_menu.png" alt="安卓竖屏设置菜单" loading="lazy">
-              <div class="shot-cap">竖屏触控设置菜单</div>
-            </div>
-          </div>
-          <div class="mobile-landscape-wrap">
-            <div class="shot-item landscape-wide" data-index="7">
-              <img src="screenshots/08_android_landscape_game.png" alt="安卓横屏实机对话" loading="lazy">
-              <div class="shot-cap">横屏实机画面与底部 8 键操作栏</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="panel" id="download">
-        <div class="star-bar">
-          <span class="stars-left" aria-hidden="true">
-            <svg width="34" height="28" viewBox="0 0 34 28"><polygon points="15,2 18,10 27,10 20,15 23,23 15,18 7,23 10,15 3,10 12,10" fill="#FFF176" stroke="#FF2E85" stroke-width="1.3"/><polygon points="27,13 28.5,17 33,17 29.5,19.5 31,24 27,21 23,24 24.5,19.5 21,17 25.5,17" fill="#19C2FF"/></svg>
-          </span>
-          下载游玩
-          <span class="stars-right" aria-hidden="true">
-            <svg width="34" height="28" viewBox="0 0 34 28"><polygon points="19,2 22,10 31,10 24,15 27,23 19,18 11,23 14,15 7,10 16,10" fill="#FFF176" stroke="#FF2E85" stroke-width="1.3"/><polygon points="7,13 8.5,17 13,17 9.5,19.5 11,24 7,21 3,24 4.5,19.5 1,17 5.5,17" fill="#19C2FF"/></svg>
-          </span>
-        </div>
-
-        <table class="spec" style="margin-top:0;">
-          <tr>
-            <th>Windows</th>
-            <td>
-              下载 <a href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-win.zip" style="color:var(--colB);font-weight:700;text-decoration:underline;">NaishoNoMahou-1.0.0-win.zip</a>（约 692 MiB），解压后双击 <code>NaishoNoMahou.exe</code>。（Ren'Py 8.6.0 暂无原生 Windows ARM64 构建，Windows 11 ARM64 可通过 Prism 转译运行）
+            <td class="font14" style="color:#B70472;" data-zh="★ 《小魔女DoReMi冒险 ～「秘密的魔法」～》 Ren'Py 8 跨平台移植版（v1.0.0）" data-jp="★ 『おジャ魔女あどべんちゃ～「ないしょのまほう」』 Ren'Py 8 マルチプラットフォーム移植版（v1.0.0）">
+              ★ 《小魔女DoReMi冒险 ～「秘密的魔法」～》 Ren'Py 8 跨平台移植版（v1.0.0）
+            </td>
+            <td align="right" class="font11">
+              <a href="game.html" data-zh="完整下载说明 &raquo;" data-jp="ダウンロード詳細 &raquo;">完整下载说明 &raquo;</a> ｜ <a href="theater.html" data-zh="查看 8 张实机截图 &raquo;" data-jp="スクリーンショット（8枚） &raquo;">查看 8 张实机截图 &raquo;</a>
             </td>
           </tr>
           <tr>
-            <th>Linux</th>
+            <td colspan="2" style="padding-top:6px;" class="img-cell">
+              <img src="img/line_star.gif" width="555" height="30" alt="" style="display:block;margin:0 auto;">
+            </td>
+          </tr>
+        </table>
+        <table class="toei-spec" style="margin-top:6px;">
+          <tr>
+            <th data-zh="原作移植" data-jp="原作移植">原作移植</th>
+            <td data-html="1" data-zh="<strong>おジャ魔女あどべんちゃ～「ないしょのまほう」</strong>（将 KiriKiri2 视觉小说移植至 Ren'Py 8，免安装环境点击即玩）" data-jp="<strong>おジャ魔女あどべんちゃ～「ないしょのまほう」</strong>（KiriKiri2 ビジュアルノベルを Ren'Py 8 へ完全移植、ランタイム同梱ですぐにプレイ可能）"><strong>おジャ魔女あどべんちゃ～「ないしょのまほう」</strong>（将 KiriKiri2 视觉小说移植至 Ren'Py 8，免安装环境点击即玩）</td>
+          </tr>
+          <tr>
+            <th data-zh="语言支持" data-jp="言語対応">语言支持</th>
+            <td data-html="1" data-zh="支持 <strong>日语原版 / 简体中文</strong> 实时切换（含菜单、剧本、UI 按钮及序章中文 Logo），内置等幅 / 比例字体切换。" data-jp="<strong>日本語オリジナル / 簡体字中国語</strong> リアルタイム切替対応（メニュー・シナリオ・UI・ロゴ含む）、等幅 / プロポーショナルフォント切替可。">支持 <strong>日语原版 / 简体中文</strong> 实时切换（含菜单、剧本、UI 按钮及序章中文 Logo），内置等幅 / 比例字体切换。</td>
+          </tr>
+          <tr>
+            <th data-zh="立即下载" data-jp="ダウンロード">立即下载</th>
             <td>
-              下载 <a href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-linux.tar.bz2" style="color:var(--colB);font-weight:700;text-decoration:underline;">NaishoNoMahou-1.0.0-linux.tar.bz2</a>（约 684 MiB，含 <code>x86_64</code> 与 <code>aarch64</code> 双架构），解压并执行：
-              <div class="run-cmd">
-                <code id="linuxCmd">tar -xjf NaishoNoMahou-1.0.0-linux.tar.bz2 && ./NaishoNoMahou-1.0.0-linux/NaishoNoMahou.sh</code>
-                <button class="copy-btn" id="copyBtn" type="button">复制</button>
+              <div class="dl-pill-row">
+                <a class="dl-pill primary" href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-win.zip">Windows (.zip)</a>
+                <a class="dl-pill" href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-linux.tar.bz2">Linux x64/ARM64</a>
+                <a class="dl-pill" href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-mac.zip">macOS Universal</a>
+                <a class="dl-pill" href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-android.apk">Android (.apk)</a>
+                <a class="dl-pill" href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-web.zip">Web / WASM (.zip)</a>
+                <a class="dl-pill" href="game.html" data-zh="运行指南 &raquo;" data-jp="動作ガイド &raquo;">运行指南 &raquo;</a>
               </div>
-              <div style="margin-top:4px;color:var(--muted);">也可直接双击或执行静态启动器：<code>./NaishoNoMahou</code>（x86_64）或 <code>./NaishoNoMahou-arm64</code>（ARM64）。</div>
-            </td>
-          </tr>
-          <tr>
-            <th>macOS</th>
-            <td>
-              下载 <a href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-mac.zip" style="color:var(--colB);font-weight:700;text-decoration:underline;">NaishoNoMahou-1.0.0-mac.zip</a>（约 701 MiB，Apple Silicon <code>arm64</code> + Intel <code>x86_64</code> 通用包），解压得 <code>NaishoNoMahou.app</code>；未签名应用首次启动若被拦截，请运行 <code>xattr -cr NaishoNoMahou.app</code>。
-            </td>
-          </tr>
-          <tr>
-            <th>Android</th>
-            <td>
-              下载 <a href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-android.apk" style="color:var(--colB);font-weight:700;text-decoration:underline;">NaishoNoMahou-1.0.0-android.apk</a>（约 733 MiB，含 <code>arm64-v8a</code> / <code>armeabi-v7a</code> / <code>x86_64</code>），直接安装即可。默认竖屏单手操作，底部集成常用操作栏并支持一键切换横屏/竖屏。
-            </td>
-          </tr>
-          <tr>
-            <th>Web</th>
-            <td>
-              下载 <a href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/download/v1.0.0/NaishoNoMahou-1.0.0-web.zip" style="color:var(--colB);font-weight:700;text-decoration:underline;">NaishoNoMahou-1.0.0-web.zip</a>（约 723 MiB，WASM 渐进加载版），解压至任意静态 HTTP 服务器即可游玩（<code>python3 -m http.server</code>）。
-            </td>
-          </tr>
-          <tr>
-            <th>iOS</th>
-            <td>
-              Ren'Py iOS 构建需在 macOS 环境下通过 Xcode 与 Apple 开发者签名编译，当前 Linux 构建环境未提供预编译 <code>.ipa</code>。
-            </td>
-          </tr>
-          <tr>
-            <th>Release</th>
-            <td>
-              <a href="https://github.com/dibin666/NaishoNoMahou-renpy/releases/tag/v1.0.0" target="_blank" rel="noopener" style="color:var(--colB);font-weight:700;text-decoration:underline;">GitHub Releases v1.0.0</a> · <a href="https://github.com/dibin666/NaishoNoMahou-renpy/blob/main/docs/RESEARCH_AND_ARCHITECTURE.md" target="_blank" rel="noopener" style="color:var(--colB);text-decoration:underline;">移植说明文档</a>
             </td>
           </tr>
         </table>
-      </section>
-    </main>
+      </td>
+      <td width="3" bgcolor="#FE509E" class="img-cell"><img src="img/spacer.gif" width="3" height="1" alt=""></td>
+    </tr>
+    <tr>
+      <td colspan="3" height="4" bgcolor="#FF81A8" class="img-cell"><img src="img/spacer.gif" width="1" height="4" alt=""></td>
+    </tr>
+    <tr>
+      <td colspan="3" class="img-cell"><img src="img/back.jpg" width="20" height="20" alt=""></td>
+    </tr>
+  </table>
+</div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="22" bgcolor="#FF81A8" align="center" valign="middle" class="font10">
+      <font color="#FFFFFF">&copy; ABC・東映アニメーション / AMADA PRINTING MFG. CO., LTD. ｜ <a href="game.html" style="color:#FFFFFF;" data-zh="小魔女DoReMi冒险 ～「秘密的魔法」～ Ren'Py 8 移植版" data-jp="おジャ魔女あどべんちゃ～「ないしょのまほう」Ren'Py 8 移植版">小魔女DoReMi冒险 ～「秘密的魔法」～ Ren'Py 8 移植版</a></font>
+    </td>
+  </tr>
+</table>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="老头阿迪的照相馆">
+  <div class="lb-box">
+    <button class="lb-close" id="lbClose" type="button" aria-label="关闭">×</button>
+    <button class="lb-prev" id="lbPrev" type="button" aria-label="上一张">‹</button>
+    <img id="lbImg" src="" alt="">
+    <button class="lb-next" id="lbNext" type="button" aria-label="下一张">›</button>
+    <div class="lb-caption" id="lbCaption"></div>
   </div>
-
-  <footer class="toei-footer">
-    &copy; ABC・東映アニメーション / AMADA PRINTING MFG. CO., LTD. &nbsp;|&nbsp; Ren'Py 8 跨平台移植项目 · <a href="https://github.com/dibin666/NaishoNoMahou-renpy" target="_blank" rel="noopener">GitHub</a>
-  </footer>
-
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="截图预览">
-    <div class="lb-box">
-      <button class="lb-close" id="lbClose" type="button" aria-label="关闭">×</button>
-      <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="上一张">‹</button>
-      <img id="lbImg" src="" alt="">
-      <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="下一张">›</button>
-      <div class="lb-caption" id="lbCaption"></div>
-    </div>
-  </div>
-
-  <script>
-    (function () {
-      const shots = [
-        { src: "screenshots/01_title_zh.png", caption: "标题界面" },
-        { src: "screenshots/02_prologue_logo_zh.png", caption: "序章中文 Logo" },
-        { src: "screenshots/03_dialogue_zh.png", caption: "实机对话" },
-        { src: "screenshots/04_cg_gallery_zh.png", caption: "特典 CG 相册" },
-        { src: "screenshots/05_android_portrait_title.png", caption: "Android 竖屏标题界面" },
-        { src: "screenshots/06_android_portrait_game.png", caption: "Android 竖屏实机与底部操作栏" },
-        { src: "screenshots/07_android_portrait_menu.png", caption: "Android 竖屏触控设置菜单" },
-        { src: "screenshots/08_android_landscape_game.png", caption: "Android 横屏实机与底部 8 键操作栏" }
-      ];
-      let idx = 0;
-      const lb = document.getElementById("lightbox");
-      const lbImg = document.getElementById("lbImg");
-      const lbCap = document.getElementById("lbCaption");
-
-      function openLb(i) {
-        idx = (i + shots.length) % shots.length;
-        lbImg.src = shots[idx].src;
-        lbImg.alt = shots[idx].caption;
-        lbCap.textContent = shots[idx].caption;
-        lb.classList.add("open");
-      }
-
-      function closeLb() {
-        lb.classList.remove("open");
-      }
-
-      document.getElementById("heroStage").addEventListener("click", () => openLb(0));
-      document.querySelectorAll(".shot-item").forEach((el) => {
-        el.addEventListener("click", () => openLb(Number(el.dataset.index)));
-      });
-      document.getElementById("lbClose").addEventListener("click", closeLb);
-      document.getElementById("lbPrev").addEventListener("click", () => openLb(idx - 1));
-      document.getElementById("lbNext").addEventListener("click", () => openLb(idx + 1));
-      lb.addEventListener("click", (e) => { if (e.target === lb) closeLb(); });
-      document.addEventListener("keydown", (e) => {
-        if (!lb.classList.contains("open")) return;
-        if (e.key === "Escape") closeLb();
-        if (e.key === "ArrowLeft") openLb(idx - 1);
-        if (e.key === "ArrowRight") openLb(idx + 1);
-      });
-
-      const navBtns = document.querySelectorAll(".sidebar .menu-btn[href^='#']");
-      navBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          navBtns.forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-        });
-      });
-
-      const copyBtn = document.getElementById("copyBtn");
-      copyBtn.addEventListener("click", async () => {
-        const text = document.getElementById("linuxCmd").textContent;
-        try {
-          await navigator.clipboard.writeText(text);
-          copyBtn.textContent = "已复制";
-          setTimeout(() => { copyBtn.textContent = "复制"; }, 1800);
-        } catch (_) {
-          copyBtn.textContent = "手动复制";
-        }
-      });
-    })();
-  </script>
+</div>
+<script>
+  initDoremiLightbox([
+    { src: "screenshots/01_title_zh.png", caption: "老头阿迪的照相馆 · 游戏标题画面", caption_jp: "オヤジーデの写真館 · タイトル画面" },
+    { src: "screenshots/02_prologue_logo_zh.png", caption: "老头阿迪的照相馆 · 序章中文 Logo", caption_jp: "オヤジーデの写真館 · プロローグロゴ" },
+    { src: "screenshots/03_dialogue_zh.png", caption: "老头阿迪的照相馆 · 实机对话画面", caption_jp: "オヤジーデの写真館 · 会話画面" },
+    { src: "screenshots/04_cg_gallery_zh.png", caption: "老头阿迪的照相馆 · 特典 CG 相册", caption_jp: "オヤジーデの写真館 · アルバムCG" },
+    { src: "screenshots/05_android_portrait_title.png", caption: "Android 竖屏标题界面", caption_jp: "Android 縦画面タイトル" },
+    { src: "screenshots/06_android_portrait_game.png", caption: "Android 竖屏实机与底部操作栏", caption_jp: "Android 縦画面プレイ" },
+    { src: "screenshots/07_android_portrait_menu.png", caption: "Android 竖屏触控设置菜单", caption_jp: "Android 縦画面メニュー" },
+    { src: "screenshots/08_android_landscape_game.png", caption: "Android 横屏实机与底部 8 键操作栏", caption_jp: "Android 横画面プレイ" }
+  ]);
+</script>
 </body>
 </html>
